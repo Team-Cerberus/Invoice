@@ -5,7 +5,8 @@ class Invoice {
             seller,
             buyer,
             invoiceRows,
-            ) {
+            transactionLocation,
+            payment) {
 
     }
 }
