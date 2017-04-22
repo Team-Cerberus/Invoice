@@ -5,9 +5,6 @@ class Invoice {
             seller,
             buyer,
             invoiceRows,
-            totalNoVAT,
-            totalVAT,
-            totalWithVAT,
             transactionLocation,
             payment) {
 
