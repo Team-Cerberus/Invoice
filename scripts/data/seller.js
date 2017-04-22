@@ -11,6 +11,7 @@ class Seller extends Entity {
         recipients,
         issuers,
         bankAccount,
+        invoices,
     ) {
         super(
         name,
@@ -21,6 +22,8 @@ class Seller extends Entity {
         vATNumber,
         authorizedPerson,
         recipients,
-        )
+        );
+
+        
     }
 }
