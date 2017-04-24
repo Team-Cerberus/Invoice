@@ -1,0 +1,27 @@
+{
+  "name": "invoice",
+  "version": "1.0.0",
+  "description": "Application for creating and managing invoices.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team-Cerberus/Invoice.git"
+  },
+  "keywords": [
+    "invoice"
+  ],
+  "author": "ludzhev <ludzhev@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Team-Cerberus/Invoice#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.2",
+    "handlebars": "^4.0.6",
+    "jquery": "^3.2.1",
+    "systemjs": "^0.20.12",
+    "systemjs-plugin-babel": "0.0.21"
+  }
+}
