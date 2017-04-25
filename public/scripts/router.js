@@ -16,7 +16,7 @@ class Router {
     const currentUrl = location.hash.slice(1);
 
     for(const {targetUrl, callback} of this._routes) {
-      const params = MyRouter.matchUrls(currentUrl, targetUrl);
+      const params = Router.matchUrls(currentUrl, targetUrl);
       if(params) {
         callback(params);
         break;

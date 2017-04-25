@@ -7,6 +7,8 @@ SystemJS.config({
 
     // Application Modules
     'app': 'scripts/app',
+    'router': 'scripts/router',
+    'homeController': 'scripts/controllers/home',
     
     // Libraries
     'jquery': 'libraries/jquery/dist/jquery.min',
