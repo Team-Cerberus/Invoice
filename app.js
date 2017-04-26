@@ -1,9 +1,13 @@
 let express = require('express'),
-  app = express();
+    bodyParser = require('body-parser');
 
 
-app.use(express.static('public'));
+var app = express();
+
+
+app.use(express.static(__dirname + '/public'));
 app.use('/libraries', express.static('node_modules'));
+app.use(bodyParser.json());
 
 //TODO: SetUp request handler
 
