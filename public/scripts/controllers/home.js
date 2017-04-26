@@ -1,9 +1,21 @@
 import $ from 'jquery';
+import { load as loadTemplate } from 'templates';
+
+const $appContainer = $('#app-container');
+const $navButtons = $('#nav-buttons').children();
+const $homeButton = $('#nav-home');
 
 class HomeController {
-
-  get(params) {
-    $('#app-container').html('<h2>Home Section</h2>');
+  get() {
+    Promise.all([
+        loadTemplate('home'),
+      ])
+      .then(([template]) => {
+        console.log('execute home');
+        $appContainer.html(template());
+        $navButtons.removeClass();
+        $homeButton.addClass('active');
+      });
   }
 }
 

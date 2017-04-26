@@ -8,6 +8,8 @@ SystemJS.config({
     // Application Modules
     'index': 'scripts/index',
     'router': 'scripts/router',
+    'requester': 'scripts/requester',
+    'templates': 'scripts/templates',
     'homeController': 'scripts/controllers/home',
     'aboutController': 'scripts/controllers/about',
     // Libraries

@@ -1,9 +1,21 @@
 import $ from 'jquery';
+import { load as loadTemplate } from 'templates';
+
+const $appContainer = $('#app-container');
+const $navButtons = $('#nav-buttons').children();
+const $aboutButton = $('#nav-about');
 
 class AboutController {
-
-  get(params) {
-    $('#app-container').html('<h2>About Section</h2>');
+  get() {
+    Promise.all([
+        loadTemplate('about'),
+      ])
+      .then(([template]) => {
+        console.log('execute about');
+        $appContainer.html(template());
+        $navButtons.removeClass();
+        $aboutButton.addClass('active');
+      });
   }
 }
 
