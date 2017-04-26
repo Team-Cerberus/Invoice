@@ -3,7 +3,7 @@ import $ from 'jquery';
 class HomeController {
 
   get(params) {
-    $('#root').html('SystemJS Works!');
+    $('#app-container').html('<h2>Home Section</h2>');
   }
 }
 

@@ -6,12 +6,12 @@ SystemJS.config({
     'systemjs-babel-build': 'libraries/systemjs-plugin-babel/systemjs-babel-browser',
 
     // Application Modules
-    'app': 'scripts/app',
+    'index': 'scripts/index',
     'router': 'scripts/router',
     'homeController': 'scripts/controllers/home',
-    
+    'aboutController': 'scripts/controllers/about',
     // Libraries
-    'jquery': 'libraries/jquery/dist/jquery.min',
+    'jquery': 'libraries/jquery/dist/jquery.min'
   },
   packages: {
     '/': {
@@ -20,4 +20,4 @@ SystemJS.config({
   }
 });
 
-System.import('app');
+System.import('index');
