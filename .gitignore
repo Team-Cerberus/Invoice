@@ -5,6 +5,9 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+### Emacs ###
+.tern-port
+
 ### Node ###
 # Logs
 logs

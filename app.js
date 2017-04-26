@@ -3,11 +3,11 @@ let express = require('express'),
 
 
 var app = express();
-
+app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 app.use('/libraries', express.static('node_modules'));
-app.use(bodyParser.json());
+app.use('/utilities', express.static('scripts/utils'));
 
 //TODO: SetUp request handler
 

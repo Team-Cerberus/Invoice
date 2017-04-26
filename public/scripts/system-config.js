@@ -13,7 +13,10 @@ SystemJS.config({
     'homeController': 'scripts/controllers/home',
     'aboutController': 'scripts/controllers/about',
     // Libraries
-    'jquery': 'libraries/jquery/dist/jquery.min'
+    'jquery': 'libraries/jquery/dist/jquery.min',
+    'handlebars': 'libraries/handlebars/dist/handlebars',
+	// Externals (hard dependency)
+	'externals': 'utilities/externals'
   },
   packages: {
     '/': {

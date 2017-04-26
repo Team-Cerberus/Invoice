@@ -1,5 +1,5 @@
 import { get as getRequest } from 'requester';
-// import { Handlebars } from 'handlebars'; // FIX ME
+import { Handlebars } from 'externals';
 
 const cacheObj = {};
 
@@ -7,7 +7,7 @@ export function load(templateName) {
   if(cacheObj.hasOwnProperty(templateName)) {
     return Promise.resolve(cacheObj[templateName]);
   }
-
+	
   return getRequest(`templates/${templateName}.handlebars`)
     .then(template => {
       const compiledTemplate = Handlebars.compile(template);
