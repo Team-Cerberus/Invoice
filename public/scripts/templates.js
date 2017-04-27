@@ -1,5 +1,5 @@
 import { get as getRequest } from 'requester';
-import { Handlebars } from 'externals';
+import Handlebars from 'handlebars';
 
 const cacheObj = {};
 
