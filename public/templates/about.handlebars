@@ -1,23 +1,91 @@
 <div class="jumbotron text-center">
-    <h1>Invoice Section</h1>
+    <h2>Invoice Section</h2>
 </div>
-<div class="container">
-    <form action="">
-        <div class="form-group row">
-            <!-- Left Column -->
-            <div class="col-lg-3">
-                <label for="input1">Издател:</label>
-                <input type="text" id="input1" class="form-control" name="" value=""/>
+<div class="container" >
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-md-3 panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Издател:</h4>
             </div>
-            <!-- Middle Column -->
-            <div class="col-lg-6">
-                <p>Фактура</p>
-            </div>
-            <!-- Right Column -->
-            <div class="col-lg-3">
-                <label for="input3">Получател:</label>
-                <input type="text" id="input3" class="form-control" name="" value=""/>
+            <div class="panel-body">
+                <p> aaa </p>
             </div>
         </div>
-    </form>
+        <!-- Middle Column -->
+        <div class="col-md-6 panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title-lg text-center">Фактура</h4>
+                </div>
+            <label for="input4">Номер:</label>
+            <input type="text" id="input4" class="form-control" name="" value=""/>
+            <br/>
+            <label for="input5">Дата на издаване:</label>
+            <input type="text" id="input5" class="form-control" name="" value=""/>
+            <br/>
+            <label for="input6">Дата на данъчно събитие:</label>
+            <input type="text" id="input6" class="form-control" name="" value=""/>
+        </div>
+            <!-- Right Column -->
+        <div class="col-md-3 panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Издател:</h4>
+            </div>
+            <div class="panel-body">
+                <p> aaa </p>
+            </div>
+        </div>
+        <!-- Bought Products Table -->
+         </div>
+            <table class="table table-condensed table-striped table-hover">
+                <thead class="thead-default">
+                    <tr>
+                        <th>№</th>
+                        <th>Шифър</th>
+                        <th>Наименование на стока/услуга</th>
+                        <th>Мярка</th>
+                        <th>Количество</th>
+                        <th>Единична цена</th>
+                        <th>Стойност</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>59-023</td>
+                        <td>Щипки за пране - 40бр.</td>
+                        <td>брой</td>
+                        <td>1</td>
+                        <td>4.40</td>
+                        <td>4.40</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>51-200</td>
+                        <td>Торопочвена смес за саксия</td>
+                        <td>брой</td>
+                        <td>2</td>
+                        <td>5.50</td>
+                        <td>11.00</td>
+                    </tr>
+                    <tr class="warning">
+                        <th scope="row">3</th>
+                        <td>51-120</td>
+                        <td>Саксия, голяма, пластмасова</td>
+                        <td>брой</td>
+                        <td>3</td>
+                        <td>5.25</td>
+                        <td>15.75</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>59-300</td>
+                        <td>Градински стол, разтегаем</td>
+                        <td>брой</td>
+                        <td>4</td>
+                        <td>45.90</td>
+                        <td>183.60</td>
+                    </tr>
+                </tbody>
+            </table>
 </div>
