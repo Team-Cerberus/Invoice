@@ -1,128 +1,23 @@
-<div class="jumbotron text-center">
-  <h2>Invoice Section</h2>
-</div>
 <div class="container">
-  <div class="row">
-    <!-- Left Column -->
-    <div class="col-md-3 panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">Издател:</h4>
-      </div>
-      <div class="panel-body">
-        <p>{{issuer}}</p>
-      </div>
-    </div>
-    <!-- Middle Column -->
-    <div class="col-md-6 panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title-lg text-center">Фактура</h4>
-      </div>
-      <label for="input4">Номер:</label>
-      <input type="text" id="input4" class="form-control" name="" value="" />
-      <br/>
-      <label for="input5">Дата на издаване:</label>
-      <input type="text" id="input5" class="form-control" name="" value="" />
-      <br/>
-      <label for="input6">Дата на данъчно събитие:</label>
-      <input type="text" id="input6" class="form-control" name="" value="" />
-    </div>
-    <!-- Right Column -->
-    <div class="col-md-3 panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">Получател:</h4>
-      </div>
-      <div class="panel-body">
-        <p>{{receiver}}</p>
-      </div>
-    </div>
-  </div>
-  <!-- Products Table -->
-  <div class="row">
-    <table class="table table-striped table-bordered table-hover">
-      <thead class="thead-default">
-        <tr>
-          <th>№</th>
-          <th>Шифър</th>
-          <th>Наименование на стока/услуга</th>
-          <th>Мярка</th>
-          <th>Количество</th>
-          <th>Единична цена</th>
-          <th>Стойност</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-      {{#each inv-sale-list}}
-        <tr>
-          <th scope="row"></th>
-          <td>{{id}}</td>
-          <td>{{item-name}}</td>
-          <td>{{item-unit}}</td>
-          <td>{{item-quantity}}</td>
-          <td>{{item-unit-price}}</td>
-          <th>
-              <div class="input-group">
-                  <span class="input-group-btn">
-                      <button class="btn btn-danger btn-sm">
-                          <i class="glyphicon glyphicon-remove"></i>
-                      </button>
-                  </span>
-              </div>
-          </th>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
-  <div class="row">
-    <div class="col-xs-10 col-md-8 col-lg-6 pull-right">
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label for="inputfield2" class="col-sm-8 control-label">Сума по фактура:</label>
-          <div class="controls">
-            <div class="input-group">
-              <input type="text" class="form-control" id="inputfield2" placeholder="0.00">
-              <span class="input-group-addon">лв.</span>
-            </div>
-          </div>
+    <div class="row">
+        <!-- Document Column -->
+        <div class="col-12 col-sm-4 col-sm-push-4 col-md-6 col-md-push-3">
+            <span>{{document.document-type}}</span>
+            <span>{{document.document-is-original}}</span>
+            <span>{{document.document-number}}</span>
+            <span>{{document.document-date-issued}}</span>
+            <span>{{document.document-date-sale}}</span>
+            <span>{{document.document-place-sale}}</span>
         </div>
-        <div class="form-group">
-          <label for="inputfield2" class="col-sm-8 control-label">Данъчна основа:</label>
-          <div class="controls">
-            <div class="input-group">
-              <input type="text" class="form-control" id="inputfield2" placeholder="0.00">
-              <span class="input-group-addon">лв.</span>
-            </div>
-          </div>
+        <!-- Issuer Column -->
+        <div class="col-12 col-sm-4 col-sm-pull-4 col-md-3 col-md-pull-6">
+            <span>Issuer:</span>
+            <span>{{issuer.issuer-name}}</span>
         </div>
-        <div class="form-group">
-          <label for="inputfield2" class="col-sm-8 control-label">Начислен ДДС:</label>
-          <div class="controls">
-            <div class="input-group">
-              <input type="text" class="form-control" id="inputfield2" placeholder="0.00">
-              <span class="input-group-addon">лв.</span>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputfield2" class="col-sm-8 control-label">Сума за плащане:</label>
-          <div class="controls">
-            <div class="input-group">
-              <input type="text" class="form-control" id="inputfield2" placeholder="0.00">
-              <span class="input-group-addon">лв.</span>
-            </div>
-          </div>
+        <!-- Receiver Column -->
+        <div class="col-12 col-sm-4 col-md-3">
+            <span>Receiver:</span>
+            <span>{{receiver.receiver-name}}</span>
         </div>
     </div>
-  </div
-  <div class="row">
-    <!-- Left Column -->
-    <div class="col-md-6">
-        <h4 class="well-lg">Съставил:</h4>
-    </div>
-    <!-- Right Column -->
-    <div class="col-md-6">
-        <h4 class="well-lg">Получил:</h4>
-    </div>
-  </div>
 </div>
