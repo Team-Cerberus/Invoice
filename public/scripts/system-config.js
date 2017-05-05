@@ -18,7 +18,8 @@ SystemJS.config({
     'jquery': 'libraries/jquery/dist/jquery.min',
     'handlebars': 'libraries/handlebars/dist/handlebars',
     'cryptojs': 'libraries/crypto-js/crypto-js',
-    
+    'toastr': 'libraries/toastr/build/toastr.min',
+
 	// Externals (hard dependency on SystemJS)
 	'externals': 'utilities/externals'
   },

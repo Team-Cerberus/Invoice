@@ -26,6 +26,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "systemjs": "^0.20.12",
-    "systemjs-plugin-babel": "0.0.21"
+    "systemjs-plugin-babel": "0.0.21",
+    "toastr": "^2.1.2"
   }
 }

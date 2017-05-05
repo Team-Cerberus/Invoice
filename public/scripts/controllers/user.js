@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import { userData } from 'data';
+import toastr from 'toastr';
 import { load as loadTemplate } from 'templates';
 
 const $appContainer = $('#app-container');
@@ -22,18 +23,22 @@ class UserController {
                 $appContainer.html(template());
 
                 $('#btn-register').on('click', () => {
+
+                    // TODO: Client-side validations for username and password.
+
                     const user = {
                         username: $('#tb-reg-username').val(),
                         password: $('#tb-reg-pass').val()
                     };
 
                     userData.register(user)
-                        .then(() => {
+                        .then((username) => {
                             location.href = '#/home';
+                            toastr.success(`Hi, ${username}!`);
                         });
 
-                      // TODO: Add popup for succes and error  
-                      
+                      // TODO: Add popup for success and error  
+
                 });
             });
     }
