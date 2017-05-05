@@ -11,6 +11,7 @@ SystemJS.config({
     'templates': 'scripts/templates',
     'homeController': 'scripts/controllers/home',
     'aboutController': 'scripts/controllers/about',
+    'invoiceController': 'scripts/controllers/invoice',
     // Libraries
     'jquery': 'libraries/jquery/dist/jquery.min',
     'handlebars': 'libraries/handlebars/dist/handlebars',
