@@ -1,17 +1,15 @@
 import $ from 'jquery';
-import {
-  load as loadTemplate
-} from 'templates';
+import { load as loadTemplate } from 'templates';
 
 const $appContainer = $('#app-container');
 
 const sampleData = {
   "document": {
-    "document-type": "invoice",   
+    "document-type": "Invoice",
     "document-is-original": "original",
     "document-number": "00000777",
     "document-date-issued": "02.01.2017",
-    "document-date-sale": "01.01.2017", 
+    "document-date-sale": "01.01.2017",
     "document-place-sale": "Hobbiton, The Shire"
   },
   "issuer": {
