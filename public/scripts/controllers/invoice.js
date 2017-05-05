@@ -14,7 +14,6 @@ class InvoiceController {
         invoiceInstance
       ])
       .then(([template, invoiceInstance]) => {
-
         $appContainer.html(template(invoiceInstance));
       });
   }
