@@ -11,7 +11,6 @@ class AboutController {
         loadTemplate('about'),
       ])
       .then(([template]) => {
-        console.log('execute about');
         $appContainer.html(template());
         $navButtons.removeClass();
         $aboutButton.addClass('active');

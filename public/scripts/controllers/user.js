@@ -42,6 +42,7 @@ class UserController {
     logIn() {
         const $username = $('#input-username');
         const $password = $('#input-password');
+        const $remember = $('#remember');
         const user = {
             username: $username.val(),
             password: $password.val()
@@ -50,9 +51,9 @@ class UserController {
         $username.val('');
         $password.val('');
 
-        // TODO: Remember pass in session storage when not checked remember.
+        let storageProvider = $remember.is(':checked') ? localStorage : sessionStorage;
 
-        userData.logIn(user)
+        userData.logIn(user, storageProvider)
             .then((username) => {
                 $('#user-log-in').addClass('hidden');
                 $('#user-log-out').removeClass('hidden');
@@ -63,7 +64,6 @@ class UserController {
     }
 
     logOut() {
-        console.log('point 1');
         userData.logOut()
             .then((username) => {
                 $('#user-log-out').addClass('hidden');
@@ -73,7 +73,7 @@ class UserController {
     }
 
     checkStatus() {
-        const user = userData.hasUser();
+        const user = userData.hasUser(localStorage);
 
         if (user) {
             $('#username').html(user.username);
