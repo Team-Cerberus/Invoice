@@ -19,7 +19,7 @@ function register(user) {
 }
 
 
-function login(user) {
+function logIn(user) {
     const body = {
         username: user.username,
         passHash: CryptoJS.SHA1(user.username + user.password).toString()
@@ -36,28 +36,44 @@ function login(user) {
         });
 }
 
-function logout() {
+function logOut() {
     const promise = new Promise((resolve, reject) => {
+        const username = localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY);
+
         localStorage.removeItem(LOCAL_STORAGE_USERNAME_KEY);
         localStorage.removeItem(LOCAL_STORAGE_AUTHKEY_KEY);
-        resolve();
+
+        resolve(username);
     });
 
     return promise;
 }
 
 function hasUser() {
-    return (!!localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY) &&
-        !!localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY));
+    const user = {
+        username: localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY),
+        authKey: localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+    };
+
+    if (user.username && user.authKey) {
+        return user;
+    }
+    else{
+        return false;
+    }
 }
 
 function getUserDetails() {
-    //TODO: Implement logic
+    const headers = {
+        'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+    };
+
+    return requester.get('api/users', headers);
 }
 
 export const userData = {
-    login,
-    logout,
+    logIn,
+    logOut,
     register,
     hasUser,
     getUserDetails

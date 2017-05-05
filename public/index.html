@@ -27,13 +27,17 @@
             <li id="nav-about"><a href="#/about">About</a></li>
           </ul>
           <form class="navbar-form navbar-right">
-            <div class="form-group">
+            <div id="user-log-in" class="form-group hidden">
               <input type="text" placeholder="User Name" id="input-username" class="form-control-sm">
               <input type="password" placeholder="Password" id="input-password" class="form-control-sm">
-              <a id="login-btn" class="btn-sm navbar-btn btn-success" href="#/usr/login">Login</a>
+              <a id="login-btn" class="btn-sm navbar-btn btn-success" href="#/user/login">Login</a>
               <input type="checkbox" class="checkbox style-2" id="remember" name="remember" value="remember">
-              <label for="remember" class="white-label">remember me</label> <span class="white-label" >or</span>
+              <label for="remember" class="white-label">remember me</label> <span class="white-label">or</span>
               <a id="register-btn" class="btn-sm navbar-btn" href="#/user/register">Register</a>
+            </div>
+            <div id="user-log-out" class="form-group hidden">
+              <span class="white-label">Welcome, <stron id="username"></stron></span>
+              <a id="logout-btn" class="btn-sm navbar-btn btn-success" href="#/user/logout">LogOut</a>
             </div>
           </form>
         </div>

@@ -10,10 +10,13 @@ router
   .on('/', () => location.hash = '#/home')
   .on('/home', () => homeController.get())
   .on('/user/register', () => userController.register())
+  .on('/user/login', () => userController.logIn())
+  .on('/user/logout', () => userController.logOut())
   .on('/user/:username', () => userController.profile())
-  .on('/user/login', () => userController.login())
-  .on('/user/logout', () => userController.logaut())
   .on('/about', () => aboutController.get());
 
-$(document).ready(router.navigate());
 $(window).on('hashchange', () => router.navigate());
+$(document).ready(() => {
+  userController.checkStatus();
+  router.navigate();
+});

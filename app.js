@@ -31,6 +31,32 @@ app.post('/api/users', (req, res) => {
     return;
 });
 
+app.put('/api/users/auth', (req, res) => {
+  res.status(200)
+    .json({
+      result: {
+        username: req.body.username,
+        authKey: `testkey`
+      }
+    });
+    return;
+});
+
+app.get('/api/users', (req, res) => {
+  res.status(200)
+    .json({
+      result: {
+        messages: [
+          `We have to write a database because this is a static array of strings`,
+          `We all live in the yellow sub-marine, the yellow sub-marine, the yellow sub-marine!`,
+          'Lorem ipsum'
+        ]
+      }
+    });
+    return;
+});
+
+
 const port = 3030;
 app.listen(port, function () {
   console.log('Server is running at http://localhost:' + port);

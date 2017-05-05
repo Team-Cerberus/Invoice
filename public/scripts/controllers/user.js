@@ -9,11 +9,10 @@ class UserController {
     profile() {
         Promise.all([
             loadTemplate('user'),
-            userData.profile()
+            userData.getUserDetails()
         ])
             .then(([template, userDetails]) => {
                 $appContainer.html(template(userDetails));
-                // TODO: Hide login and register buttons
             });
     }
 
@@ -34,17 +33,55 @@ class UserController {
                     userData.register(user)
                         .then((username) => {
                             location.href = '#/home';
-                            toastr.success(`Hi, ${username}!`);
-                        });
-
-                      // TODO: Add popup for success and error  
-
+                            toastr.success(`${username} was registered successfully!`);
+                        }).catch(errorMsg => toastr.error(errorMsg));
                 });
             });
     }
 
-    login() {
+    logIn() {
+        const $username = $('#input-username');
+        const $password = $('#input-password');
+        const user = {
+            username: $username.val(),
+            password: $password.val()
+        };
 
+        $username.val('');
+        $password.val('');
+
+        // TODO: Remember pass in session storage when not checked remember.
+
+        userData.logIn(user)
+            .then((username) => {
+                $('#user-log-in').addClass('hidden');
+                $('#user-log-out').removeClass('hidden');
+                $('#username').html(username);
+                location.href = `#/user/${username}`;
+                toastr.success(`Hi, ${username}!`);
+            }).catch(errorMsg => toastr.error(errorMsg));
+    }
+
+    logOut() {
+        console.log('point 1');
+        userData.logOut()
+            .then((username) => {
+                $('#user-log-out').addClass('hidden');
+                $('#user-log-in').removeClass('hidden');
+                toastr.success(`GoodBye, ${username}!`);
+            }).catch(errorMsg => toastr.error(errorMsg));
+    }
+
+    checkStatus() {
+        const user = userData.hasUser();
+
+        if (user) {
+            $('#username').html(user.username);
+            $('#user-log-out').removeClass('hidden');
+        }
+        else {
+            $('#user-log-in').removeClass('hidden');
+        }
     }
 }
 
