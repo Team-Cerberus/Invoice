@@ -55,12 +55,10 @@ function getUserDetails() {
     //TODO: Implement logic
 }
 
-export default {
-    userData: {
-        login,
-        logout,
-        register,
-        hasUser,
-        getUserDetails
-    }
-};
+export const userData = {
+    login,
+    logout,
+    register,
+    hasUser,
+    getUserDetails
+}
