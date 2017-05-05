@@ -23,3 +23,5 @@ export function post(url, body, headers = {}) {
 export function put(url, body, headers = {}) {
   return request(url, 'PUT', JSON.stringify(body), headers);
 }
+
+export default {get, post, put};

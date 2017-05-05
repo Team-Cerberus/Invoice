@@ -7,13 +7,18 @@ SystemJS.config({
     // Application Modules
     'index': 'scripts/index',
     'router': 'scripts/router',
+    'data': 'scripts/data',
     'requester': 'scripts/requester',
     'templates': 'scripts/templates',
     'homeController': 'scripts/controllers/home',
+    'userController': 'scripts/controllers/user',
     'aboutController': 'scripts/controllers/about',
+    
     // Libraries
     'jquery': 'libraries/jquery/dist/jquery.min',
     'handlebars': 'libraries/handlebars/dist/handlebars',
+    'cryptojs': 'libraries/crypto-js/crypto-js',
+    
 	// Externals (hard dependency on SystemJS)
 	'externals': 'utilities/externals'
   },
