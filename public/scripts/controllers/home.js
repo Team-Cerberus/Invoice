@@ -11,7 +11,6 @@ class HomeController {
         loadTemplate('home'),
       ])
       .then(([template]) => {
-        console.log('execute home');
         $appContainer.html(template());
         $navButtons.removeClass();
         $homeButton.addClass('active');

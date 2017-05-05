@@ -15,8 +15,10 @@ SystemJS.config({
     // Libraries
     'jquery': 'libraries/jquery/dist/jquery.min',
     'handlebars': 'libraries/handlebars/dist/handlebars',
-	// Externals (hard dependency on SystemJS)
-	'externals': 'utilities/externals'
+	  // Externals (hard dependency on SystemJS)
+	  'externals': 'utilities/externals',
+    // Sample data for dev
+    'devDataContainer': 'sample-data/sample-data'
   },
   packages: {
     '/': {
