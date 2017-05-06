@@ -16,7 +16,9 @@ function register(user) {
         .then((response) => {
             const user = response.result;
 
-            return Promise.resolve(user.username)
+            return Promise.resolve(user.username);
+        }).catch(err => {
+            return Promise.reject(err);
         });
 }
 
@@ -38,6 +40,8 @@ function logIn(user, storage) {
             storageProvider.setItem(LOCAL_STORAGE_AUTHKEY_KEY, user.authKey);
 
             return Promise.resolve(user.username)
+        }).catch(err => {
+            return Promise.reject(err);
         });
 }
 

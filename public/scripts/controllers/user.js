@@ -34,7 +34,7 @@ class UserController {
                         .then((username) => {
                             location.href = '#/home';
                             toastr.success(`${username} was registered successfully!`);
-                        }).catch(errorMsg => toastr.error(errorMsg));
+                        }).catch(error => toastr.error(error.responseText));
                 });
             });
     }
@@ -61,7 +61,10 @@ class UserController {
                 $('#username').html(username);
                 location.href = `#/user/${username}`;
                 toastr.success(`Hi, ${username}!`);
-            }).catch(errorMsg => toastr.error(errorMsg));
+            }).catch(error => {
+                location.href = `#/home`;
+                toastr.error(error.responseText);
+                });
     }
 
     logOut() {
