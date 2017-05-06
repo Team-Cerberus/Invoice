@@ -2,6 +2,7 @@ const express = require('express'),
   authKeyGenerator = require('./authentication/auth-key-generator'),
   bodyParser = require('body-parser'),
   low = require('lowdb'),
+  logger = require('./scripts/config/logger'),
   db = low('./database/users.json'),
   app = express();
 
@@ -23,6 +24,7 @@ app.post('/api/users', (req, res) => {
     usernameLower: user.usernameLower
   })
     .value()) {
+
     res.status(400)
       .json('Username is already taken');
     return;
@@ -59,5 +61,5 @@ app.put('/api/users/auth', (req, res) => {
 
 const port = 3030;
 app.listen(port, function () {
-  console.log('Server is running at http://localhost:' + port);
+  logger.info('Server is running at http://localhost:' + port);
 });
