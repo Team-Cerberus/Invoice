@@ -43,25 +43,20 @@
         </div>
       </div>
     </nav>
-    <nav class="navbar navbar-default navbar-fixed-second">
-      <!-- Bottom navbar: user is logged in -->
-      <div class="container">
-        <div class="collapse navbar-collapse collapse-buttons">
-          <form class="navbar-form navbar-left" role="search">
-            <button class="btn btn-sm navbar-button btn-success">Button</button>
-            <button class="btn btn-sm navbar-button btn-default">Button</button>
-            <button class="btn btn-sm navbar-button btn-default">Button</button>
-          </form>
-        </div>
-      </div>
-    </nav>
+
+    <nav class="navbar navbar-default navbar-fixed-second"> <!-- Bottom navbar: user is logged in -->
+       <div class="container">
+         <div class="collapse navbar-collapse">
+			       <ul id="nav-buttons" class="nav navbar-nav">
+                <li id="sample-1"><a href="#/invoice/sample1">Sample 1</a></li>
+                <li id="sample-2"><a href="#/invoice/sample2">Sample 2</a></li>
+            </ul>
+         </div>
+       </div>
+     </nav>
   </header>
 
-  <main class="container">
-    <div class="row">
-      <div id="app-container"></div>
-    </div>
-  </main>
+  <main id="app-container" class="container"></main>
 </body>
 
 </html>

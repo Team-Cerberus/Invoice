@@ -1,0 +1,161 @@
+<div class="container panel panel-default">
+    <form action="#/invoice" method="post">
+    <!-- Top Row -->
+    <div class="row">
+        <!-- Document Column -->
+        <div class="col-12 col-sm-4 col-sm-push-4 col-md-6 col-md-push-3">
+            <div class="panel panel-default text-left">
+                <h2 class="text-center">{{document.document-type}}</h2>
+                <h2 class="text-center"><small>{{document.document-is-original}}</small></h2>
+                <div class="form-group text-left">
+                    <label for="documentId" class="aria-label">Number:</label>
+                    <input type="text" id="documentId" value="{{document.document-number}}"><br/>
+                    <label for="documentDateIssued" class="aria-label">Date Issued:</label>
+                    <input type="text" id="documentDateIssued" value="{{document.document-date-issued}}"><br/>
+                    <label for="documentDateIssued" class="aria-label">Date Issued:</label>
+                    <input type="text" id="documentDateIssued" value="{{document.document-date-issued}}"><br/>
+                    <label for="documentDateSale" class="aria-label">Date of Sale/Service:</label>
+                    <input type="text" id="documentDateSale" value="{{document.document-date-sale}}"><br/>
+                    <label for="documentPlaceSale" class="aria-label">Place of Sale/Service:</label>
+                    <input type="text" id="documentPlaceSale" value="{{document.document-place-sale}}"><br/>
+                </div>
+            </div>
+        </div>
+        <!-- Issuer Column -->
+        <div class="col-12 col-sm-4 col-sm-pull-4 col-md-3 col-md-pull-6">
+            <div class="well well-lg">
+                <div class="form-group">
+                    <label for="issuerName" class="aria-label">Issuer:</label>
+                    <input type="text" id="issuerName" value="{{issuer.issuer-name}}"><br/>
+                    <label for="issuerAddress" class="aria-label">Address:</label>
+                    <input type="text" id="issuerAddress" value="{{issuer.issuer-address}}"><br/>
+                </div>
+            </div>
+        </div>
+        <!-- Receiver Column -->
+        <div class="col-12 col-sm-4 col-md-3">
+            <div class="well well-lg">
+                <div class="form-group">
+                    <label for="receiverName" class="aria-label">Receiver:</label>
+                    <input type="text" id="receiverName" value="{{receiver.receiver-name}}"><br/>
+                    <label for="receiverAddress" class="aria-label">Address:</label>
+                    <input type="text" id="receiverAddress" value="{{receiver.receiver-address}}"><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Items Row -->
+    <div class="row">
+        <table class="table table-responsive table-striped table-condensed">
+            <thead class="thead-default">
+                <tr>
+                    <th>#</th>
+                    <th>Item Code</th>
+                    <th>Item Description</th>
+                    <th>Unit</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each invoice-item-list}}
+                <tr>
+                    <th>{{@index}}</th>
+                    <td><input type="text" class="form-control" value="{{item-id}}" /></td>
+                    <td><input type="text" class="form-control" value="{{item-name}}" /></td>
+                    <td><input type="text" class="form-control" value="{{item-unit}}" /></td>
+                    <td><input type="text" class="form-control" value="{{item-quantity}}" /></td>
+                    <td><input type="text" class="form-control" value="{{item-unit-price}}" /></td>
+                    <td><input type="text" class="form-control" value="{{item-total-price}}" /></td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger btn-xs">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+                <!-- Additional Item Row -->
+                <tr>
+                    <th></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success btn-xs">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Totals Row -->
+    <div class="row">
+        <div class="col-12 col-sm-6 pull-right">
+            <div class="form-group">
+                <label for="inputfield2" class="col-sm-8 control-label">Total Price:</label>
+                <div class="controls">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="inputfield2" placeholder="0.00">
+                        <span class="input-group-addon">BGN</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputfield2" class="col-sm-8 control-label">Tax Base:</label>
+                <div class="controls">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="inputfield2" placeholder="0.00">
+                        <span class="input-group-addon">BGN</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputfield2" class="col-sm-8 control-label">Value Added Tax (VAT)</label>
+                <div class="controls">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="inputfield2" placeholder="0.00">
+                        <span class="input-group-addon">BGN</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputfield2" class="col-sm-8 control-label">Total Due:</label>
+                <div class="controls">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="inputfield2" placeholder="0.00">
+                        <span class="input-group-addon">BGN</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bottom Row -->
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-md-6">
+            <h4 class="well-lg">Created By:</h4>
+        </div>
+        <!-- Right Column -->
+        <div class="col-md-6">
+            <h4 class="well-lg">Accepted By:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <button type="submit" id="submitInvoice" class="btn btn-lg btn-success pull-right">Submit</button>
+    </div>
+    </form>
+</div>

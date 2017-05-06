@@ -13,15 +13,16 @@ SystemJS.config({
     'homeController': 'scripts/controllers/home',
     'userController': 'scripts/controllers/user',
     'aboutController': 'scripts/controllers/about',
-    
+    'invoiceController': 'scripts/controllers/invoice',
     // Libraries
     'jquery': 'libraries/jquery/dist/jquery.min',
     'handlebars': 'libraries/handlebars/dist/handlebars',
     'cryptojs': 'libraries/crypto-js/crypto-js',
     'toastr': 'libraries/toastr/build/toastr.min',
-
-	// Externals (hard dependency on SystemJS)
-	'externals': 'utilities/externals'
+	  // Externals (hard dependency on SystemJS)
+	  'externals': 'utilities/externals',
+    // Sample data for dev
+    'devDataContainer': 'sample-data/sample-data'
   },
   packages: {
     '/': {
