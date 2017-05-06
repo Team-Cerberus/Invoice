@@ -16,6 +16,7 @@ SystemJS.config({
     'invoiceController': 'scripts/controllers/invoice',
     // Libraries
     'jquery': 'libraries/jquery/dist/jquery.min',
+	'bootstrap': 'js/bootstrap.min',
     'handlebars': 'libraries/handlebars/dist/handlebars',
     'cryptojs': 'libraries/crypto-js/crypto-js',
     'toastr': 'libraries/toastr/build/toastr.min',

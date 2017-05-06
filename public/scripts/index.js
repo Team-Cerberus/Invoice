@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import 'bootstrap';
 import { Router } from 'router';
 import homeController from 'homeController';
 import userController from 'userController';

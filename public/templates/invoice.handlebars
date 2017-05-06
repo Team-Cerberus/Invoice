@@ -46,7 +46,7 @@
     </div>
     <!-- Items Row -->
     <div class="row">
-        <table class="table table-responsive table-striped table-condensed">
+        <table class="table table-responsive table-striped">
             <thead class="thead-default">
                 <tr>
                     <th>#</th>
@@ -63,12 +63,12 @@
                 {{#each invoice-item-list}}
                 <tr>
                     <th>{{@index}}</th>
-                    <td><input type="text" class="form-control" value="{{item-id}}" /></td>
-                    <td><input type="text" class="form-control" value="{{item-name}}" /></td>
-                    <td><input type="text" class="form-control" value="{{item-unit}}" /></td>
-                    <td><input type="text" class="form-control" value="{{item-quantity}}" /></td>
-                    <td><input type="text" class="form-control" value="{{item-unit-price}}" /></td>
-                    <td><input type="text" class="form-control" value="{{item-total-price}}" /></td>
+                    <td><input type="text" class="form-control item-cell" value="{{item-id}}" /></td>
+                    <td><input type="text" class="form-control item-cell" value="{{item-name}}" /></td>
+                    <td><input type="text" class="form-control item-cell" value="{{item-unit}}" /></td>
+                    <td><input type="text" class="form-control item-cell" value="{{item-quantity}}" /></td>
+                    <td><input type="text" class="form-control item-cell" value="{{item-unit-price}}" /></td>
+                    <td><input type="text" class="form-control item-cell" value="{{item-total-price}}" /></td>
                     <td>
                         <div class="input-group">
                             <span class="input-group-btn">
