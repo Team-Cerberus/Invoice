@@ -57,6 +57,7 @@ class UserController {
             .then((username) => {
                 $('#user-log-in').addClass('hidden');
                 $('#user-log-out').removeClass('hidden');
+                $('#user-navbar').removeClass('hidden');
                 $('#username').html(username);
                 location.href = `#/user/${username}`;
                 toastr.success(`Hi, ${username}!`);
@@ -64,11 +65,12 @@ class UserController {
     }
 
     logOut() {
-        userData.logOut()
-            .then((username) => {
-                $('#user-log-out').addClass('hidden');
-                $('#user-log-in').removeClass('hidden');
-                toastr.success(`GoodBye, ${username}!`);
+      userData.logOut()
+        .then((username) => {
+              $('#user-log-out').addClass('hidden');
+              $('#user-navbar').addClass('hidden');
+              $('#user-log-in').removeClass('hidden');
+              toastr.success(`GoodBye, ${username}!`);
             }).catch(errorMsg => toastr.error(errorMsg));
     }
 
@@ -76,8 +78,9 @@ class UserController {
         const user = userData.hasUser(localStorage);
 
         if (user) {
-            $('#username').html(user.username);
-            $('#user-log-out').removeClass('hidden');
+          $('#username').html(user.username);
+          $('#user-log-out').removeClass('hidden');
+          $('#user-navbar').removeClass('hidden');
         }
         else {
             $('#user-log-in').removeClass('hidden');
