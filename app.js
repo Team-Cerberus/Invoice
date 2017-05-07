@@ -1,5 +1,6 @@
 const express = require('express'),
   bodyParser = require('body-parser'),
+
   low = require('lowdb'),
   logger = require('./scripts/config/logger'),
   db = low('./database/users.json'),
@@ -16,8 +17,14 @@ app.use('/libraries', express.static('node_modules'));
 
 require('./authentication/index').add(app, db);
 
-const usersRouter = require('./routers/usersRouter')(db);
+const usersRouter = require('./routers/usersRouter')(db),
+  invoiceRouter = require('./routers/invoiceRouter')(db),
+  sellersRouter = require('./routers/sellersRouter')(db),
+  buyersRouter = require('./routers/buyersRouter')(db);
 
 app.use('/api/users', usersRouter);
+app.use('/invoice', invoiceRouter);
+app.use('/sellers', sellersRouter);
+app.use('/buyers', buyersRouter);
 
 app.listen(app.get('port'), logger.info('Server is running at http://localhost:', app.get('port')));
