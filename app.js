@@ -16,7 +16,7 @@ const express = require('express'),
 //   }]
 // }
 const db = lowdb('db.json');
-db.defaults('[]');
+db.defaults('users:[]');
 
 const app = express();
   low = require('lowdb'),
@@ -67,6 +67,7 @@ app.put('/api/users/auth', (req, res) => {
       .json('Username or password is invalid');
     return;
   }
+  
   res.status(200)
     .json({
       result: {
@@ -76,6 +77,16 @@ app.put('/api/users/auth', (req, res) => {
     });
   return;
 });
+
+const usersRouter = require('./routers/usersRouter')(db);
+const invoiceRouter = require('./routers/invoiceRouter')(db);
+const sellersRouter = require('./routers/sellersRouter')(db);
+const buyersRouter = require('./routers/buyersRouter')(db);
+
+//app.use('/api/users', usersRouter);
+app.use('/invoice', usersRouter);
+app.use('/sellers', usersRouter);
+app.use('/buyers', usersRouter);
 
 const port = 3030;
 app.listen(port, function () {
