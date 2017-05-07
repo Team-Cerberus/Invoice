@@ -1,18 +1,21 @@
 const express = require('express'),
   bodyParser = require('body-parser'),
+  lowdb = require('lowdb'),
   passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
 
 // Mocking database
-let usersDB = {
-  "users": [{
-    "username": "test",
-    "password": "pass",
-  }, {
-    "username": "test2",
-    "password": "pass2",
-  }]
-}
+// let usersDB = {
+//   "users": [{
+//     "username": "test",
+//     "password": "pass",
+//   }, {
+//     "username": "test2",
+//     "password": "pass2",
+//   }]
+// }
+const db = lowdb('db.json');
+db.defaults('[]');
 
 const app = express();
 app.use(bodyParser.json());
@@ -28,7 +31,7 @@ app.post('/api/users', (req, res) => {
         username: req.body.username
       }
     });
-    return;
+  return;
 });
 
 const port = 3030;
