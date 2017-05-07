@@ -28,6 +28,8 @@
     "passport-local": "^1.0.0",
     "systemjs": "^0.20.12",
     "systemjs-plugin-babel": "0.0.21",
-    "toastr": "^2.1.2"
+    "toastr": "^2.1.2",
+    "underscore-db": "^0.12.2",
+    "winston": "^2.3.1"
   }
 }

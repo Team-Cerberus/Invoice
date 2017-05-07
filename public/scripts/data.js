@@ -4,6 +4,8 @@ import requester from 'requester';
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username';
 const LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
 
+let storageProvider = sessionStorage;
+
 function register(user) {
     const body = {
         username: user.username,
@@ -14,12 +16,17 @@ function register(user) {
         .then((response) => {
             const user = response.result;
 
-            return Promise.resolve(user.username)
+            return Promise.resolve(user.username);
+        }).catch(err => {
+            return Promise.reject(err);
         });
 }
 
 
-function login(user) {
+function logIn(user, storage) {
+
+    storageProvider = storage || sessionStorage;
+
     const body = {
         username: user.username,
         passHash: CryptoJS.SHA1(user.username + user.password).toString()
@@ -29,35 +36,55 @@ function login(user) {
         .then((response) => {
             const user = response.result;
 
-            localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, user.username);
-            localStorage.setItem(LOCAL_STORAGE_AUTHKEY_KEY, user.authKey);
+            storageProvider.setItem(LOCAL_STORAGE_USERNAME_KEY, user.username);
+            storageProvider.setItem(LOCAL_STORAGE_AUTHKEY_KEY, user.authKey);
 
             return Promise.resolve(user.username)
+        }).catch(err => {
+            return Promise.reject(err);
         });
 }
 
-function logout() {
+function logOut() {
     const promise = new Promise((resolve, reject) => {
-        localStorage.removeItem(LOCAL_STORAGE_USERNAME_KEY);
-        localStorage.removeItem(LOCAL_STORAGE_AUTHKEY_KEY);
-        resolve();
+        const username = storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY);
+
+        storageProvider.removeItem(LOCAL_STORAGE_USERNAME_KEY);
+        storageProvider.removeItem(LOCAL_STORAGE_AUTHKEY_KEY);
+
+        resolve(username);
     });
 
     return promise;
 }
 
-function hasUser() {
-    return (!!localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY) &&
-        !!localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY));
+function hasUser(storage) {
+    storageProvider = storage || localStorage;
+
+    const user = {
+        username: storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY),
+        authKey: storageProvider.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+    };
+    
+    if (user.username && user.authKey) {
+        return user;
+    }
+    else{
+        return false;
+    }
 }
 
 function getUserDetails() {
-    //TODO: Implement logic
+    const headers = {
+        'x-auth-key': storageProvider.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+    };
+
+    return requester.get('api/users', headers);
 }
 
 export const userData = {
-    login,
-    logout,
+    logIn,
+    logOut,
     register,
     hasUser,
     getUserDetails

@@ -1,5 +1,9 @@
+/* html {
+	overflow-y: scroll;
+} */
+
 body {
-    padding-top: 100px;
+    padding-top: 125px;
 }
 
 .hidden {
@@ -8,4 +12,19 @@ body {
 
 .white-label {
   color: white;
+}
+
+input.item-cell {
+	display: block !important; 
+	padding: 0 !important; 
+	margin: 0 !important; 
+	border: 0 !important; 
+	width: 100% !important; 
+	border-radius: 0 !important; 
+	line-height: 1 !important;
+}
+
+td.item-cell {
+	margin: 0 !important; 
+	padding: 0 !important;
 }

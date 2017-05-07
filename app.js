@@ -1,4 +1,5 @@
 const express = require('express'),
+  authKeyGenerator = require('./authentication/auth-key-generator'),
   bodyParser = require('body-parser'),
   lowdb = require('lowdb'),
   passport = require('passport'),
@@ -18,17 +19,59 @@ const db = lowdb('db.json');
 db.defaults('[]');
 
 const app = express();
+  low = require('lowdb'),
+  logger = require('./scripts/config/logger'),
+  db = low('./database/users.json'),
+  app = express();
+
+db._.mixin(require('underscore-db'));
+
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 app.use('/libraries', express.static('node_modules'));
 
-//TODO: SetUp request handler
+let test = require('./authentication/index').add(app, db);
+
 app.post('/api/users', (req, res) => {
+  const user = req.body;
+
+  user.usernameLower = user.username.toLowerCase();
+  user.authKey = authKeyGenerator.get(user.id);
+  if (db.get('users').find({
+    usernameLower: user.usernameLower
+  })
+    .value()) {
+
+    res.status(400)
+      .json('Username is already taken');
+    return;
+  }
+  db.get('users')
+    .value()
+    .push(user);
+
+  res.status(200)
+    .json({
+      result: user
+    });
+})
+
+app.put('/api/users/auth', (req, res) => {
+  var user = req.body;
+  var dbUser = db.get('users').find({
+    usernameLower: user.username.toLowerCase()
+  }).value();
+  if (!dbUser || dbUser.passHash !== user.passHash) {
+    res.status(404)
+      .json('Username or password is invalid');
+    return;
+  }
   res.status(200)
     .json({
       result: {
-        username: req.body.username
+        username: dbUser.username,
+        authKey: dbUser.authKey
       }
     });
   return;
@@ -36,5 +79,5 @@ app.post('/api/users', (req, res) => {
 
 const port = 3030;
 app.listen(port, function () {
-  console.log('Server is running at http://localhost:' + port);
+  logger.info('Server is running at http://localhost:' + port);
 });

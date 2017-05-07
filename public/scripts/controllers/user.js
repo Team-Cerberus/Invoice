@@ -9,11 +9,10 @@ class UserController {
     profile() {
         Promise.all([
             loadTemplate('user'),
-            userData.profile()
+            userData.getUserDetails()
         ])
             .then(([template, userDetails]) => {
                 $appContainer.html(template(userDetails));
-                // TODO: Hide login and register buttons
             });
     }
 
@@ -34,17 +33,61 @@ class UserController {
                     userData.register(user)
                         .then((username) => {
                             location.href = '#/home';
-                            toastr.success(`Hi, ${username}!`);
-                        });
-
-                      // TODO: Add popup for success and error  
-
+                            toastr.success(`${username} was registered successfully!`);
+                        }).catch(error => toastr.error(error.responseText));
                 });
             });
     }
 
-    login() {
+    logIn() {
+        const $username = $('#input-username');
+        const $password = $('#input-password');
+        const $remember = $('#remember');
+        const user = {
+            username: $username.val(),
+            password: $password.val()
+        };
 
+        $username.val('');
+        $password.val('');
+
+        let storageProvider = $remember.is(':checked') ? localStorage : sessionStorage;
+
+        userData.logIn(user, storageProvider)
+            .then((username) => {
+                $('#user-log-in').addClass('hidden');
+                $('#user-log-out').removeClass('hidden');
+                $('#user-navbar').removeClass('hidden');
+                $('#username').html(username);
+                location.href = `#/user/${username}`;
+                toastr.success(`Hi, ${username}!`);
+            }).catch(error => {
+                location.href = `#/home`;
+                toastr.error(error.responseText);
+                });
+    }
+
+    logOut() {
+      userData.logOut()
+        .then((username) => {
+              $('#user-log-out').addClass('hidden');
+              $('#user-navbar').addClass('hidden');
+              $('#user-log-in').removeClass('hidden');
+              toastr.success(`GoodBye, ${username}!`);
+            }).catch(errorMsg => toastr.error(errorMsg));
+    }
+
+    checkStatus() {
+        const user = userData.hasUser(localStorage);
+
+        if (user) {
+          $('#username').html(user.username);
+          $('#user-log-out').removeClass('hidden');
+          $('#user-navbar').removeClass('hidden');
+        }
+        else {
+            $('#user-log-in').removeClass('hidden');
+        }
     }
 }
 
