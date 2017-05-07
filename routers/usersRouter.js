@@ -1,59 +1,67 @@
-var express = require('express'),
-  idGenerator = require('../utils/id-generator')(),
-  authKeyGenerator = require('../utils/auth-key-generator');
+const express = require('express'),
+  authKeyGenerator = require('../authentication/auth-key-generator'),
+  router = express.Router();
 
-module.exports = function(db) {
-  var router = express.Router();
+function configure(db) {
 
   router
-    //.get('/', function(req, res) {
-    //   var page = +(req.query.page || 0),
-    //     size = +(req.query.size || 10);
+    .post('/', (req, res) => {
+      const user = req.body;
 
-    //   var users = db('users')
-    //     .chain()
-    //     .sortBy('username')
-    //     .slice(page * size)
-    //     .take(size).value();
-
-    //   res.json({
-    //     result: users || []
-    //   });
-    // })
-    .post('/', function(req, res) {     //TODO: proper routes
-      var user = req.body;
-      console.log(user);
-      user.username = user.username.toLowerCase();
+      user.usernameLower = user.username.toLowerCase();
       user.authKey = authKeyGenerator.get(user.id);
-      if (db('users').find({
-          username: user.username.toLowerCase()
-        })) {
+
+      if (db.get('users').find({
+        usernameLower: user.usernameLower
+      })
+        .value()) {
+
         res.status(400)
           .json('Username is already taken');
         return;
       }
-      db('users').insert(user);
+      db.get('users')
+        .value()
+        .push(user);
 
-      res.status(201)
+      res.status(200)
         .json({
           result: user
         });
     })
-    .put('/auth', function(req, res) {
-      var user = req.body;
-      var dbUser = db('users').find({
-        username: user.username.toLowerCase()
-      });
+    .put('/auth', (req, res) => {
+      const user = req.body;
+
+      const dbUser = db.get('users').find({
+        usernameLower: user.username.toLowerCase()
+      }).value();
+
       if (!dbUser || dbUser.passHash !== user.passHash) {
         res.status(404)
           .json('Username or password is invalid');
+        return;
       }
-      res.json({
-        result: {
-          username: dbUser.username,
-          authKey: dbUser.authKey
-        }
-      });
+
+      res.status(200)
+        .json({
+          result: {
+            username: dbUser.username,
+            authKey: dbUser.authKey
+          }
+        });
+    })
+    .get('/', (req, res) => {
+
+      // TODO: Implement real logic
+      res.status(200)
+        .json({
+          result: {
+           //
+          }
+        });
     });
+
   return router;
 };
+
+module.exports = configure;
