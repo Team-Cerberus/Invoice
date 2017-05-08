@@ -1,14 +1,18 @@
 class Entity {
     constructor(
         name,
-        address,
-        idNumber, //EGN or EIK
-        vATRegistered,
-        authorizedPerson,
-        recipients,
+        streetAddress,
+        city,
+        zIP,
+        idNumber,        //EGN or EIK
+        // vATRegistered,
+        // authorizedPerson,
+        // recipients,
     ) {
         this._name = name;
-        this._address = address;
+        this._streetAddress = streetAddress;
+        this._city = city;
+        this._zIP = zIP;
         this._idNumber = idNumber;
 
         this._vATNumber = vATRegistered ? 'BG' + idNumber : null;
@@ -32,19 +36,29 @@ class Entity {
         return this._address;
     }
 
+    get city() {
+        return this._city;
+    }
+
+    get zIP() {
+        return this._zIP;
+    }
+
     get idNumber() {
         return this._idNumber;
     }
 
-    get vATNumber() {
-        return this._vATNumber;
-    }
+    // get vATNumber() {
+    //     return this._vATNumber;
+    // }
 
-    get authorizedPerson() {
-        return this._authorisedPerson;
-    }
+    // get authorizedPerson() {
+    //     return this._authorisedPerson;
+    // }
 
-    get recipients() {
-        return this._recipients;
-    }
+    // get recipients() {
+    //     return this._recipients;
+    // }
 }
+
+export default new Entity();

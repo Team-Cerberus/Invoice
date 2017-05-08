@@ -56,3 +56,5 @@ class InvoiceRow {
         return this._rowPriceWithVAT;
     }
 }
+
+export default new InvoiceRow();

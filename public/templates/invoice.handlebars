@@ -75,12 +75,12 @@
                 {{#each invoice-item-list}}
                 <tr class="invoice-row">
                     <th>{{@index}}</th>
-                    <td><input type="text" class="form-control item-cell" value="{{item-id}}" /></td>
-                    <td><input type="text" class="form-control item-cell" value="{{item-name}}" /></td>
-                    <td><input type="text" class="form-control item-cell" value="{{item-unit}}" /></td>
-                    <td><input type="text" class="form-control item-cell" value="{{item-quantity}}" /></td>
-                    <td><input type="text" class="form-control item-cell" value="{{item-unit-price}}" /></td>
-                    <td><input type="text" class="form-control item-cell" value="{{item-total-price}}" /></td>
+                    <td><input type="text" class="product-id form-control item-cell" value="{{item-id}}" /></td>
+                    <td><input type="text" class="product-name form-control item-cell" value="{{item-name}}" /></td>
+                    <td><input type="text" class="product-unit form-control item-cell" value="{{item-unit}}" /></td>
+                    <td><input type="text" class="product-quantity form-control item-cell" value="{{item-quantity}}" /></td>
+                    <td><input type="text" class="product-unit-price form-control item-cell" value="{{item-unit-price}}" /></td>
+                    <td><input type="text" class="product-total-price form-control item-cell" value="{{item-total-price}}" /></td>
                     <td>
                         <div class="input-group">
                             <span class="input-group-btn">
@@ -159,15 +159,15 @@
     <div class="row">
         <!-- Left Column -->
         <div class="col-md-6">
-            <h4 class="well-lg">Created By:</h4>
+            <h4 id="issuer" class="well-lg">Created By:</h4>
         </div>
         <!-- Right Column -->
         <div class="col-md-6">
-            <h4 class="well-lg">Accepted By:</h4>
+            <h4 id="recipient" class="well-lg">Accepted By:</h4>
         </div>
     </div>
     <div class="row">
-        <button type="submit" id="submitInvoice" class="btn btn-lg btn-success pull-right">Submit</button>
+        <a type="submit" id="submitInvoice" class="btn btn-lg btn-success pull-right" href="#/invoice/post">Submit</a>
     </div>
     </form>
 </div>

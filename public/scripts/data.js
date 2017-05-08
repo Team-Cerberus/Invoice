@@ -148,7 +148,7 @@ function buyerAdd(buyer) {
         });
 }
 
-function sellerUpdate(buyer) {
+function buyerUpdate(buyer) {
     var options = {
         data: buyer,
         headers: {
@@ -185,7 +185,7 @@ function invoiceAdd(invoice) {
         });
 }
 
-function sellerUpdate(invoice) {
+function invoiceUpdate(invoice) {
     var options = {
         data: invoice,
         headers: {
@@ -203,5 +203,14 @@ export const userData = {
     logOut,
     register,
     hasUser,
-    getUserDetails
+    getUserDetails,
+    getSellers,
+    sellerAdd,
+    sellerUpdate,
+    getBuyers,
+    buyerAdd,
+    buyerUpdate,
+    getInvoices,
+    invoiceAdd,
+    invoiceUpdate,
 }

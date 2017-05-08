@@ -6,10 +6,11 @@ class Invoice {
         buyer,
         invoiceRows,
         transactionLocation,
-        payment,
-        explanation,
+        //payment,
+        //explanation,
         issuer,
-        recipient) {
+        recipient
+        ) {
 
         this._number = number;
         this._dateOfIssue = dateOfIssue;

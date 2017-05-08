@@ -6,12 +6,12 @@ class Seller extends Entity {
         city,
         zIP,
         idNumber,
-        vATNumber,
-        authorizedPerson,
-        recipients,
-        issuers,
-        bankAccounts,
-        invoices,
+        // vATNumber,
+        // authorizedPerson,
+        // recipients,
+        // issuers,
+        // bankAccounts,
+        // invoices,
     ) {
         super(
             name,
@@ -19,31 +19,31 @@ class Seller extends Entity {
             city,
             zIP,
             idNumber,
-            vATNumber,
-            authorizedPerson,
-            recipients,
+            // vATNumber,
+            // authorizedPerson,
+            // recipients,
         );
 
-        if (issuers) {
-            this._issuers = issuers;
-        }
-        else {
-            this._issuers = [];
-            this._issuers.push(this.authorizedPerson);
-        }
+        // if (issuers) {
+        //     this._issuers = issuers;
+        // }
+        // else {
+        //     this._issuers = [];
+        //     this._issuers.push(this.authorizedPerson);
+        // }
 
-        this._bankAccounts = bankAccounts;
+        // this._bankAccounts = bankAccounts;
 
         this._invoices = [];
     }
 
-    get issuers() {
-        return this._issuers;
-    }
+    // get issuers() {
+    //     return this._issuers;
+    // }
 
-    get bankAccounts() {
-        return this._bankAccounts;
-    }
+    // get bankAccounts() {
+    //     return this._bankAccounts;
+    // }
 
     get invoices() {
         return this._invoices;
@@ -54,3 +54,5 @@ class Seller extends Entity {
         this._invoices.push(invoiceToAdd);
     }
 }
+
+export default new Seller();
