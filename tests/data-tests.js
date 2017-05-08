@@ -3,11 +3,23 @@ const chai = require('chai'),
     sinonChai = require('sinon-chai'),
     mockRequire = require('mock-require');
 
-mockRequire('cryptojs');
-mockRequire('requester');
-mockRequire('data', { userData: require('../public/scripts/data').userData });
+mockRequire('cryptojs', {
+    SHA1: () => {
+        return 'HASHED_PASSWORD';
+    }
+});
+mockRequire('requester', {
+    post: () => Promise.resolve({
+        result: {
+            username: 'username',
+            authKey: 'AUTHENTICATION_KEY'
+        }
+    })
+});
 
-const { userData } = require('data'),
+const { userData } = require('../public/scripts/data'),
+    requester = require('requester'),
+    CryptoJS = require('cryptojs'),
     { expect } = chai;
 
 chai.use(sinonChai);
@@ -17,7 +29,103 @@ describe('Data layer tests', () => {
         LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
 
     describe('User tests', () => {
-    
+
+        describe('Register tests', () => {
+            const user = {
+                username: 'username',
+                password: 'password'
+            };
+
+            let requesterPostSpy,
+                cryptoJSSpy;
+
+            beforeEach(() => {
+                requesterPostSpy = sinon.spy(requester, 'post');
+                cryptoJSSpy = sinon.spy(CryptoJS, 'SHA1');
+                localStorage.clear();
+            });
+
+            afterEach(() => {
+                requesterPostSpy.restore();
+                cryptoJSSpy.restore();
+                localStorage.clear();
+            });
+
+            it('expect register to make a POST request', (done) => {
+
+                userData.register(user)
+                    .then(expect(requesterPostSpy).to.have.been.calledOnce)
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect register to make a POST request to api/users', (done) => {
+
+                userData.register(user)
+                    .then(expect(requesterPostSpy).to.have.been.calledWith('api/users'))
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect register to make a POST request with user username', (done) => {
+
+                userData.register(user)
+                    .then(() => {
+                        const expected = {
+                            username: user.username
+                        };
+                        expect(requesterPostSpy.args[0][1].username).to.equal(user.username);
+                    })
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect register to make a call to CryptoJS.SHA1() once', (done) => {
+
+                userData.register(user)
+                    .then(expect(cryptoJSSpy).to.have.been.calledOnce)
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect register to make a call to CryptoJS.SHA1() with correct params', (done) => {
+
+                userData.register(user)
+                    .then(expect(cryptoJSSpy).to.have.been.calledWith(user.username + user.password))
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect register to make a POST request with user passHash', (done) => {
+
+                userData.register(user)
+                    .then(() => {
+                        const expected = {
+                            data: {
+                                username: user.username
+                            }
+                        };
+                        expect(requesterPostSpy.args[0][1].passHash).to.equal('HASHED_PASSWORD');
+                    })
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect register function to return a Promise', () => {
+
+                const promise = userData.register(user);
+                expect(promise).to.be.an.instanceof(Promise);
+            });
+
+            it('expect register function to return a Promise which resolves with registered username', (done) => {
+
+                userData.register(user)
+                    .then((value) => expect(value).to.deep.equal(user.username))
+                    .then(() => done())
+                    .catch(done);
+            });
+        });
+
         describe('Logout tests', () => {
 
             beforeEach(() => {
@@ -36,7 +144,7 @@ describe('Data layer tests', () => {
                 userData.logOut()
                     .then(expect(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null)
                     .then(() => done())
-                    .catch(() => done());
+                    .catch(done);
 
             });
 
@@ -47,7 +155,7 @@ describe('Data layer tests', () => {
                 userData.logOut()
                     .then(expect(localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.null)
                     .then(() => done())
-                    .catch(() => done());
+                    .catch(done);
 
             });
 
@@ -63,7 +171,7 @@ describe('Data layer tests', () => {
                 userData.logOut()
                     .then((username) => expect(username).to.be.equal('username'))
                     .then(() => done())
-                    .catch(() => done());
+                    .catch(done);
             });
         });
     });
