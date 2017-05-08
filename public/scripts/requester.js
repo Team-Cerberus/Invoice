@@ -26,4 +26,8 @@ export function put(url, body, headers = {}) {
   return request(url, 'PUT', JSON.stringify(body), headers);
 }
 
-export default {get, post, put};
+export function del(url, body, headers = {}) {
+  return request(url, 'DELETE', JSON.stringify(body), headers);
+}
+
+export default {get, post, put, del};
