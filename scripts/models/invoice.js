@@ -95,3 +95,5 @@ class Invoice {
         return this._recipient;
     }
 }
+
+export default new Invoice();

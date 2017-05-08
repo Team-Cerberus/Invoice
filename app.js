@@ -6,14 +6,14 @@ const express = require('express'),
   db = low('./database/users.json'),
   app = express();
 
+app.use(express.static(__dirname + '/public'));
+app.use('/libraries', express.static('node_modules'));
+
 db._.mixin(require('underscore-db'));
 
 app.set('port', (process.env.PORT || 3030));
 
 app.use(bodyParser.json());
-
-app.use(express.static(__dirname + '/public'));
-app.use('/libraries', express.static('node_modules'));
 
 require('./authentication/index').add(app, db);
 

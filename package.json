@@ -31,5 +31,9 @@
     "toastr": "^2.1.2",
     "underscore-db": "^0.12.2",
     "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0"
   }
 }
