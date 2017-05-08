@@ -4,12 +4,14 @@ import toastr from 'toastr';
 import { load as loadTemplate } from 'templates';
 
 const $appContainer = $('#app-container');
+const $secondBar = $('#secondBar');
 
 class UserController {
     profile() {
 		// TODO: Remove Temporary Details
 		let userDetails =  {
-			userName: "My Awesome User",
+			userFullName: "My Awesome User",
+			userName: 123,
 			sellers: [
 			{
 				name: "My Awesome Seller 1",
@@ -54,10 +56,12 @@ class UserController {
 		// let userDetails = userData.getUserDetails();
         Promise.all([
             loadTemplate('user-profile'),
+			loadTemplate('user-navbar'),
             userDetails
         ])
-            .then(([template, userDetails]) => {
-                $appContainer.html(template(userDetails));
+            .then(([profileTemplate, navbarTemplate, userDetails]) => {
+                $appContainer.html(profileTemplate(userDetails));
+				$secondBar.html(navbarTemplate(userDetails));
             });
     }
 
