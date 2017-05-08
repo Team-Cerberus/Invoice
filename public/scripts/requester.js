@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 function request(url, type, body, headers) {
   const promise = new Promise((resolve, reject) => $.ajax({
     url,
