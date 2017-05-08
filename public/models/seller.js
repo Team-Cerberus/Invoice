@@ -1,3 +1,5 @@
+import Entity from 'entity';
+
 class Seller extends Entity {
 
     constructor(
@@ -11,7 +13,7 @@ class Seller extends Entity {
         // recipients,
         // issuers,
         // bankAccounts,
-        // invoices,
+        //invoices,
     ) {
         super(
             name,
@@ -34,7 +36,7 @@ class Seller extends Entity {
 
         // this._bankAccounts = bankAccounts;
 
-        this._invoices = [];
+        //this._invoices = [];
     }
 
     // get issuers() {
@@ -45,14 +47,14 @@ class Seller extends Entity {
     //     return this._bankAccounts;
     // }
 
-    get invoices() {
-        return this._invoices;
-    }
+    // get invoices() {
+    //     return this._invoices;
+    // }
 
-    addInvoice(invoiceToAdd) {
-        //VALIDATION
-        this._invoices.push(invoiceToAdd);
-    }
+    // addInvoice(invoiceToAdd) {
+    //     //VALIDATION
+    //     this._invoices.push(invoiceToAdd);
+    // }
 }
 
 export default new Seller();

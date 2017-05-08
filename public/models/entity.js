@@ -1,4 +1,4 @@
-class Entity {
+export default class Entity {
     constructor(
         name,
         streetAddress,
@@ -15,17 +15,17 @@ class Entity {
         this._zIP = zIP;
         this._idNumber = idNumber;
 
-        this._vATNumber = vATRegistered ? 'BG' + idNumber : null;
+        //this._vATNumber = vATRegistered ? 'BG' + idNumber : null;
 
-        this._authorisedPerson = authorizedPerson;
+        //this._authorisedPerson = authorizedPerson;
 
-        if (recipients) {
-            this._recipients = recipients;
-        }
-        else {
-            this._recipients = [];
-            this._recipients.push(this.authorizedPerson);
-        }
+        // if (recipients) {
+        //     this._recipients = recipients;
+        // }
+        // else {
+        //     this._recipients = [];
+        //     this._recipients.push(this.authorizedPerson);
+        // }
     }
 
     get name() {
@@ -60,5 +60,3 @@ class Entity {
     //     return this._recipients;
     // }
 }
-
-export default new Entity();

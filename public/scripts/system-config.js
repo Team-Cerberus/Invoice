@@ -16,10 +16,10 @@ SystemJS.config({
     'aboutController': 'scripts/controllers/about',
     'invoiceController': 'scripts/controllers/invoice',
     // Models
-    'invoice': '../models/invoice',
-    'seller': '../models/seller',
-    'entity': '../models/entity',
-    'invoiceRow': '../models/seller',
+    'invoice': 'models/invoice',
+    'seller': 'models/seller',
+    'entity': 'models/entity',
+    'invoiceRow': 'models/seller',
     // Libraries
     'jquery': 'libraries/jquery/dist/jquery.min',
 	  'bootstrap': 'js/bootstrap.min',
