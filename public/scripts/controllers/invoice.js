@@ -22,6 +22,8 @@ class InvoiceController {
     const $newInvoiceRow = $('.invoice-row').first().clone();
     $newInvoiceRow.children().val('');
     $('.invoice-rows').append($newInvoiceRow);
+    location.hash = '#/empty';
+    //location.hash = '#/invoice/addrow';
   }
 
   post() {
