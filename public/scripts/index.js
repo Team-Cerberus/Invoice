@@ -14,8 +14,11 @@ router
   .on('/user/login', userController.logIn)
   .on('/user/logout', userController.logOut)
   .on('/user/:username', userController.profile)
+  .on('/user/profile', userController.profile)
   .on('/home', homeController.get)
   .on('/about', aboutController.get)
+  .on('/user/companies', userController.companies)
+  .on('/user/invoices', userController.invoices)
   .on('/invoice', invoiceController.get)
   .on('/invoice/addrow', invoiceController.addInvoiceRow)
   .on('/invoice/:id', invoiceController.get);

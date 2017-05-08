@@ -1,62 +1,24 @@
 <div class="container panel panel-default">
+	<div class="row">
+        <h2>Invoices for user <span class='label'>{{userName}}</span></h2>
+<h3>My sellers</h3>
+	<div class="list-group">
+	{{#each sellers}}
+		<a href="#" class="list-group-item">{{name}}</a>
+	{{/each}}
+	</div>
+<h3>My buyers</h3>
+	<div class="list-group">
+	{{#each buyers}}
+		<a href="#" class="list-group-item">{{name}}</a>
+	{{/each}}
+	</div>
+</div>
+
+
+
+<div class="container panel panel-default">
     <form action="#/invoice" method="post">
-    <!-- Top Row -->
-    <div class="row">
-        <!-- Document Column -->
-        <div class="col-12 col-sm-4 col-sm-push-4 col-md-6 col-md-push-3">
-            <div class="panel panel-default text-left">
-                <h2 class="text-center">Invoice</h2>    <!--{{document.document-type}}-->
-                <h2 class="text-center"><small>{{document.document-is-original}}</small></h2>
-                <div class="form-group text-left">
-                    <label for="documentId" class="aria-label">Number:</label>
-                    <input type="text" id="documentId" value="{{document.document-number}}"><br/>
-                    <label for="documentDateIssued" class="aria-label">Date Issued:</label>
-                    <input type="text" id="documentDateIssued" value="{{document.document-date-issued}}"><br/>
-                    <label for="documentDateIssued" class="aria-label">Date Issued:</label>
-                    <input type="text" id="documentDateIssued" value="{{document.document-date-issued}}"><br/>
-                    <label for="documentDateSale" class="aria-label">Date of Sale/Service:</label>
-                    <input type="text" id="documentDateSale" value="{{document.document-date-sale}}"><br/>
-                    <label for="documentPlaceSale" class="aria-label">Place of Sale/Service:</label>
-                    <input type="text" id="documentPlaceSale" value="{{document.document-place-sale}}"><br/>
-                </div>
-            </div>
-        </div>
-        <!-- Issuer Column -->
-        <div class="col-12 col-sm-4 col-sm-pull-4 col-md-3 col-md-pull-6">
-            <div class="well well-lg">
-                <div class="form-group">
-                    <label for="sellerName" class="aria-label">Seller:</label>
-                    <input type="text" id="sellerName" value="{{seller.sellerName}}"><br/>
-                    <label for="sellerAddress" class="aria-label">Address:</label>
-                    <input type="text" id="sellerAddress" value="{{issuer.issuer-address}}"><br/>
-                    <label for="sellerCity" class="aria-label">City:</label>
-                    <input type="text" id="sellerCity" value=""><br/>
-                    <label for="sellerZip" class="aria-label">ZIP:</label>
-                    <input type="text" id="sellerZip" value=""><br/>
-                    <label for="sellerIdNumber" class="aria-label">ID Number:</label>
-                    <input type="text" id="sellerIdNumber" value=""><br/>
-                </div>
-            </div>
-        </div>
-        <!-- Receiver Column -->
-        <div class="col-12 col-sm-4 col-md-3">
-            <div class="well well-lg">
-                <div class="form-group">
-                    <label for="buyerName" class="aria-label">Buyer:</label>
-                    <input type="text" id="buyerName" value="{{buyer.sellerName}}"><br/>
-                    <label for="buyerAddress" class="aria-label">Address:</label>
-                    <input type="text" id="buyerAddress" value="{{buyer.issuer-address}}"><br/>
-                    <label for="buyerCity" class="aria-label">City:</label>
-                    <input type="text" id="buyerCity" value=""><br/>
-                    <label for="buyerZip" class="aria-label">ZIP:</label>
-                    <input type="text" id="buyerZip" value=""><br/>
-                    <label for="buyerIdNumber" class="aria-label">ID Number:</label>
-                    <input type="text" id="buyerIdNumber" value=""><br/>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Items Row -->
     <div class="row">
         <table class="table table-responsive table-striped">
             <thead class="thead-default">

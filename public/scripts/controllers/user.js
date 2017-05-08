@@ -7,15 +7,78 @@ const $appContainer = $('#app-container');
 
 class UserController {
     profile() {
+		// TODO: Remove Temporary Details
+		let userDetails =  {
+			userName: "My Awesome User",
+			sellers: [
+			{
+				name: "My Awesome Seller 1",
+				streetAddress: "Sofia, Invisible str. 11",
+				city: "Sofia",
+				zIP: "1000",
+				idNumber: "12345",
+				vATNumber: "900000000",
+				authorizedPerson: "My Awesome MOL",
+				recepients: [],
+				issuers: [],
+				bankAccounts: [],
+				invoices: []
+			},
+			{
+				name: "My Other Seller",
+				streetAddress: "Plovdiv, Asenovgradsko shose 1",
+				city: "Plovdiv",
+				zIP: "1234",
+				idNumber: "22222",
+				vATNumber: "223423414",
+				authorizedPerson: "My Other MOL",
+				recepients: [],
+				issuers: [],
+				bankAccounts: [],
+				invoices: []
+			}
+			],
+			buyers: [
+			{
+				name: "My Awesome Buyer 1",
+				streetAddress: "Vladislav Varnenchik blvd. 5",
+				city: "Sofia",
+				zIP: "1234",
+				idNumber: "22222",
+				vATNumber: "1234567489",
+				authorizedPerson: "Their Awesome MOL",
+				bankAccounts: [],
+			}],
+		}
+		
+		// let userDetails = userData.getUserDetails();
         Promise.all([
-            loadTemplate('user'),
-            userData.getUserDetails()
+            loadTemplate('user-profile'),
+            userDetails
         ])
             .then(([template, userDetails]) => {
                 $appContainer.html(template(userDetails));
             });
     }
 
+    invoices() {
+		// TODO: Remove Temporary Details
+		let userInvoices =  {
+			userName: "My Awesome User",
+			sellers: [],
+			buyers: [],
+		}
+		
+		// let userInvoices = userData.getUserInvoices();
+        Promise.all([
+            loadTemplate('user-invoices'),
+            userInvoices
+        ])
+            .then(([template, userInvoices]) => {
+                $appContainer.html(template(userInvoices));
+            });
+    }	
+	
     register() {
         loadTemplate('register')
             .then((template) => {
