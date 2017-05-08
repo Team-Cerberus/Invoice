@@ -19,7 +19,8 @@ class InvoiceController {
   }
 
   addInvoiceRow() {
-    const $newInvoiceRow = $('.invoice-row').first().clone().children().val('');
+    const $newInvoiceRow = $('.invoice-row').first().clone();
+    $newInvoiceRow.children().val('');
     $('.invoice-rows').append($newInvoiceRow);
   }
 
