@@ -4,7 +4,7 @@ import requester from 'requester';
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username';
 const LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
 
-let storageProvider = sessionStorage;
+let storageProvider;
 
 function register(user) {
     const body = {
@@ -46,6 +46,8 @@ function logIn(user, storage) {
 }
 
 function logOut() {
+    storageProvider = storageProvider || localStorage;
+
     const promise = new Promise((resolve, reject) => {
         const username = storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY);
 
@@ -65,11 +67,11 @@ function hasUser(storage) {
         username: storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY),
         authKey: storageProvider.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
     };
-    
+
     if (user.username && user.authKey) {
         return user;
     }
-    else{
+    else {
         return false;
     }
 }
