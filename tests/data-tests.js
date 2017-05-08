@@ -218,7 +218,7 @@ describe('Data layer tests', () => {
                 expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null;
 
                 userData.logIn(user, sessionStorage)
-                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY )).to.equal(user.username))
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.equal(user.username))
                     .then(() => done())
                     .catch(done);
             });
@@ -228,7 +228,7 @@ describe('Data layer tests', () => {
                 expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null;
 
                 userData.logIn(user)
-                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY )).to.equal(user.username))
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.equal(user.username))
                     .then(() => done())
                     .catch(done);
             });
@@ -244,7 +244,7 @@ describe('Data layer tests', () => {
             });
 
             it('expect authKey to be set in session storage, when session storage is passed', (done) => {
-                
+
                 expect(sessionStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.null;
 
                 userData.logIn(user, sessionStorage)
@@ -253,8 +253,8 @@ describe('Data layer tests', () => {
                     .catch(done);
             });
 
-             it('expect authKey to be set in session storage, when no storage provider is passed', (done) => {
-                
+            it('expect authKey to be set in session storage, when no storage provider is passed', (done) => {
+
                 expect(sessionStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.null;
 
                 userData.logIn(user)
@@ -291,34 +291,64 @@ describe('Data layer tests', () => {
 
         describe('LogOut tests', () => {
 
+            const user = {
+                username: 'username',
+                password: 'password'
+            };
+
             beforeEach(() => {
                 localStorage.clear();
+                sessionStorage.clear();
             });
+
             afterEach(() => {
                 localStorage.clear();
+                sessionStorage.clear();
                 localStorage.itemInsertionCallback = null;
+                sessionStorage.itemInsertionCallback = null;
             });
 
-            it('expect username to be cleared from localStorage.', (done) => {
+            it('expect username to be cleared from session storage.', (done) => {
 
-                localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, 'username');
-                expect(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.equal('username');
-
-                userData.logOut()
-                    .then(expect(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null)
+                userData.logIn(user, sessionStorage)
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.equal('username'))
+                    .then(() => userData.logOut())
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null)
                     .then(() => done())
                     .catch(() => done());
 
             });
 
-            it('expect authKey to be cleared from localStorage.', (done) => {
-                localStorage.setItem(LOCAL_STORAGE_AUTHKEY_KEY, 'authentication key');
-                expect(localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.equal('authentication key');
+            it('expect username to be cleared from local storage.', (done) => {
 
-                userData.logOut()
-                    .then(expect(localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.null)
+                userData.logIn(user, localStorage)
+                    .then(() => expect(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.equal('username'))
+                    .then(() => userData.logOut())
+                    .then(() => expect(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null)
                     .then(() => done())
-                    .catch(done);
+                    .catch(() => done());
+
+            });
+
+            it('expect authKey to be cleared from session storage.', (done) => {
+
+                userData.logIn(user, sessionStorage)
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.equal('AUTHENTICATION_KEY'))
+                    .then(() => userData.logOut())
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.null)
+                    .then(() => done())
+                    .catch(() => done());
+
+            });
+
+            it('expect authKey to be cleared from local storage.', (done) => {
+
+                userData.logIn(user, localStorage)
+                    .then(() => expect(localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.equal('AUTHENTICATION_KEY'))
+                    .then(() => userData.logOut())
+                    .then(() => expect(localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.null)
+                    .then(() => done())
+                    .catch(() => done());
 
             });
 
@@ -335,6 +365,79 @@ describe('Data layer tests', () => {
                     .then((username) => expect(username).to.be.equal('username'))
                     .then(() => done())
                     .catch(done);
+            });
+        });
+
+        describe('hasUser tests', () => {
+
+            const user = {
+                username: 'username',
+                password: 'password'
+            };
+
+            beforeEach(() => {
+                localStorage.clear();
+                sessionStorage.clear();
+            });
+
+            afterEach(() => {
+                localStorage.clear();
+                sessionStorage.clear();
+                localStorage.itemInsertionCallback = null;
+                sessionStorage.itemInsertionCallback = null;
+            });
+
+            it('expect hasUser() to return false when there in no username or authKey in local storage', () => {
+                expect(userData.hasUser()).to.be.false;
+            });
+
+            it('expect hasUser() to return false when authKey is missing from local storage', (done) => {
+
+                userData.logIn(user, localStorage)
+                    .then(() => {
+                        localStorage.removeItem(LOCAL_STORAGE_AUTHKEY_KEY);
+                        expect(userData.hasUser()).to.be.false;
+                    })
+                    .then(() => done())
+                    .catch(done);
+
+            });
+
+            it('expect hasUser() to return false when username is missing from local storage', (done) => {
+
+                userData.logIn(user, localStorage)
+                    .then(() => {
+                        localStorage.removeItem(LOCAL_STORAGE_USERNAME_KEY);
+                        expect(userData.hasUser()).to.be.false;
+                    })
+                    .then(() => done())
+                    .catch(done);
+
+            });
+
+            it('expect hasUser() to return user when both username and authKey are available in local storage', (done) => {
+
+                userData.logIn(user, localStorage)
+                    .then(() => {
+                        const expectedUser = {
+                            username: user.username,
+                            authKey: 'AUTHENTICATION_KEY'
+                        }
+
+                        expect(userData.hasUser()).to.be.deep.equal(expectedUser);
+                    })
+                    .then(() => done())
+                    .catch(done);
+
+            });
+
+            it('expect hasUser() to return false when user is loged in session storage', (done) => {
+
+                userData.logIn(user, sessionStorage)
+                    .then(() => expect(userData.hasUser()).to.be.false)
+                    .then(() => done())
+                    .catch(done);
+
             });
         });
     });

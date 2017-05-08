@@ -22,7 +22,6 @@ function register(user) {
         });
 }
 
-
 function logIn(user, storage) {
 
     storageProvider = storage || sessionStorage;
@@ -160,6 +159,7 @@ function sellerUpdate(buyer) {
             return resp.result;
         });
 }
+
 function getInvoices() {            //TODO: For a single invoice and for the last invoice number
     const body = {
         headers: {
