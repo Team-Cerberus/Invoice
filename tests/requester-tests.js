@@ -180,4 +180,96 @@ describe('Requester tests', () => {
                 .catch(done);
         });
     });
+
+    describe('Put tests', () => {
+        let ajaxSpy;
+
+        beforeEach(() => {
+            ajaxSpy = sinon.spy($, 'ajax');
+        });
+
+        afterEach(() => {
+            ajaxSpy.restore();
+        });
+
+        it('expect put function to make a ajax request', (done) => {
+
+            requester.put()
+                .then(() => expect(ajaxSpy).to.have.been.calledOnce)
+                .then(() => done())
+                .catch(done);
+        });
+
+        it('expect put function to make a ajax request with type PUT', (done) => {
+
+            requester.put()
+                .then(() => expect(ajaxSpy.getCall(0).args[0].type).to.equal('PUT'))
+                .then(() => done())
+                .catch(done);
+        });
+
+        it('expect put function to make a ajax request with proper url', (done) => {
+
+            const properUrl = 'some/kind/of/proper/url';
+
+            requester.put(properUrl)
+                .then(() => expect(ajaxSpy.getCall(0).args[0].url).to.equal(properUrl))
+                .then(() => done())
+                .catch(done);
+        });
+
+        it('expect put function to make a ajax request with proper body, when body passed', (done) => {
+
+            const properUrl = 'some/kind/of/proper/url',
+                body = {
+                    username: 'username',
+                    passHash: 'HASHED_PASSWORD'
+                };
+
+            requester.put(properUrl, body)
+                .then(() => expect(ajaxSpy.getCall(0).args[0].data).to.equal(JSON.stringify(body)))
+                .then(() => done())
+                .catch(done);
+        });
+
+        it('expect put function to make a ajax request with empty object as headers, when no headers passed', (done) => {
+
+            requester.put()
+                .then(() => expect(ajaxSpy.getCall(0).args[0].headers).to.deep.equal({}))
+                .then(() => done())
+                .catch(done);
+        });
+
+        it('expect put function to make a ajax request with proper headers, when headers passed', (done) => {
+
+            const properUrl = 'some/kind/of/proper/url',
+                body = {
+                    username: 'username',
+                    passHash: 'HASHED_PASSWORD'
+                },
+                headers = {
+                    'x-auth-key': 'AUTHENTICATION_KEY'
+                };
+
+            requester.put(properUrl, body, headers)
+                .then(() => expect(ajaxSpy.getCall(0).args[0].headers).to.equal(headers))
+                .then(() => done())
+                .catch(done);
+        });
+
+        it('expect put function to return a Promise', () => {
+
+            const promise = requester.put();
+            expect(promise).to.be.an.instanceof(Promise);
+        });
+
+        it('expect put function to return a Promise which resolves with with proper response', (done) => {
+
+            requester.put()
+                .then((value) => expect(value).to.equal('proper response'))
+                .then(() => done())
+                .catch(done);
+        });
+
+    });
 });
