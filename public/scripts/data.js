@@ -84,6 +84,120 @@ function getUserDetails() {
     return requester.get('api/users', headers);
 }
 
+function getSellers() {
+    const body = {
+        headers: {
+            'x-auth-key': storageProvider.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+        }
+    }
+    return requester.get('/sellers', options)
+        .then(function (res) {
+            return res.result;
+        });
+}
+
+function sellerAdd(seller) {
+    var options = {
+        data: seller,
+        headers: {
+            'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+        }
+    };
+    return requester.post('/sellers', options)
+        .then(function (resp) {
+            return resp.result;
+        });
+}
+
+function sellerUpdate(seller) {
+    var options = {
+        data: seller,
+        headers: {
+            'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+        }
+    };
+    return requester.put('/sellers', options)
+        .then(function (resp) {
+            return resp.result;
+        });
+
+}
+
+function getBuyers() {
+    const body = {
+        headers: {
+            'x-auth-key': storageProvider.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+        }
+    }
+    return requester.get('/buyers', options)
+        .then(function (res) {
+            return res.result;
+        });
+}
+
+function buyerAdd(buyer) {
+    var options = {
+        data: buyer,
+        headers: {
+            'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+        }
+    };
+    return requester.post('/buyers', options)
+        .then(function (resp) {
+            return resp.result;
+        });
+}
+
+function sellerUpdate(buyer) {
+    var options = {
+        data: buyer,
+        headers: {
+            'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+        }
+    };
+    return requester.put('/buyers', options)
+        .then(function (resp) {
+            return resp.result;
+        });
+}
+function getInvoices() {            //TODO: For a single invoice and for the last invoice number
+    const body = {
+        headers: {
+            'x-auth-key': storageProvider.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+        }
+    }
+    return requester.get('/invoices', options)
+        .then(function (res) {
+            return res.result;
+        });
+}
+
+function invoiceAdd(invoice) {
+    var options = {
+        data: invoice,
+        headers: {
+            'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+        }
+    };
+    return requester.post('/invoices', options)
+        .then(function (resp) {
+            return resp.result;
+        });
+}
+
+function sellerUpdate(invoice) {
+    var options = {
+        data: invoice,
+        headers: {
+            'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+        }
+    };
+    return requester.put('/invoices', options)
+        .then(function (resp) {
+            return resp.result;
+        });
+}
+
 export const userData = {
     logIn,
     logOut,

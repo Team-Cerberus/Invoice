@@ -2,7 +2,7 @@ class Invoice {
     constructor(number,
         dateOfIssue,
         dateTaxEvent,
-        seller,
+        sellerIdNumber,
         buyer,
         invoiceRows,
         transactionLocation,
@@ -14,7 +14,7 @@ class Invoice {
         this._number = number;
         this._dateOfIssue = dateOfIssue;
         this._dateTaxEvent = dateTaxEvent;
-        this._seller = seller;
+        this._sellerIdNumber = sellerIdNumber;
         this._buyer = buyer;
 
         if (invoiceRows) {
@@ -47,8 +47,8 @@ class Invoice {
         return this._dateTaxEvent;
     }
 
-    get seller() {
-        return this._seller;
+    get sellerIdNumber() {
+        return this._sellerIdNumber;
     }
 
     get buyer() {
@@ -95,3 +95,5 @@ class Invoice {
         return this._recipient;
     }
 }
+
+export default new Invoice();

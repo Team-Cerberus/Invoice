@@ -17,6 +17,7 @@ router
   .on('/home', homeController.get)
   .on('/about', aboutController.get)
   .on('/invoice', invoiceController.get)
+  .on('/invoice/addrow', invoiceController.addInvoiceRow)
   .on('/invoice/:id', invoiceController.get);
 
 $(window).on('hashchange', () => router.navigate());
