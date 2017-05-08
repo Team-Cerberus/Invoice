@@ -12,6 +12,12 @@ mockRequire('requester', {
     post: () => Promise.resolve({
         result: {
             username: 'username',
+            passHash: 'HASHED_PASSWORD'
+        }
+    }),
+    put: () => Promise.resolve({
+        result: {
+            username: 'username',
             authKey: 'AUTHENTICATION_KEY'
         }
     })
@@ -42,13 +48,11 @@ describe('Data layer tests', () => {
             beforeEach(() => {
                 requesterPostSpy = sinon.spy(requester, 'post');
                 cryptoJSSpy = sinon.spy(CryptoJS, 'SHA1');
-                localStorage.clear();
             });
 
             afterEach(() => {
                 requesterPostSpy.restore();
                 cryptoJSSpy.restore();
-                localStorage.clear();
             });
 
             it('expect register to make a POST request', (done) => {
@@ -126,7 +130,166 @@ describe('Data layer tests', () => {
             });
         });
 
-        describe('Logout tests', () => {
+        describe('LogIn tests', () => {
+            const user = {
+                username: 'username',
+                password: 'password'
+            };
+
+            let requesterPutSpy,
+                cryptoJSSpy;
+
+            beforeEach(() => {
+                requesterPutSpy = sinon.spy(requester, 'put');
+                cryptoJSSpy = sinon.spy(CryptoJS, 'SHA1');
+                localStorage.clear();
+                sessionStorage.clear();
+            });
+
+            afterEach(() => {
+                requesterPutSpy.restore();
+                cryptoJSSpy.restore();
+                localStorage.clear();
+                sessionStorage.clear();
+                localStorage.itemInsertionCallback = null;
+                sessionStorage.itemInsertionCallback = null;
+            });
+
+            it('expect login to make a PUT request', (done) => {
+
+                userData.logIn(user, localStorage)
+                    .then(expect(requesterPutSpy).to.have.been.calledOnce)
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect login to make a PUT request to api/users/auth', (done) => {
+
+                userData.logIn(user, localStorage)
+                    .then(expect(requesterPutSpy).to.have.been.calledWith('api/users/auth'))
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect login to make a PUT request with user username', (done) => {
+
+                userData.logIn(user, localStorage)
+                    .then(() => {
+                        const expected = {
+                            username: user.username
+                        };
+                        expect(requesterPutSpy.args[0][1].username).to.equal(user.username);
+                    })
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect login to make a call to CryptoJS.SHA1() once', (done) => {
+
+                userData.logIn(user, localStorage)
+                    .then(expect(cryptoJSSpy).to.have.been.calledOnce)
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect login to make a call to CryptoJS.SHA1() with correct params', (done) => {
+
+                userData.logIn(user, localStorage)
+                    .then(expect(cryptoJSSpy).to.have.been.calledWith(user.username + user.password))
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect login to make a POST request with user passHash', (done) => {
+
+                userData.logIn(user, localStorage)
+                    .then(() => {
+                        const expected = {
+                            username: user.username
+                        };
+                        expect(requesterPutSpy.args[0][1].passHash).to.equal('HASHED_PASSWORD');
+                    })
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect username to be set in session storage, when session storage is passed', (done) => {
+
+                expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null;
+
+                userData.logIn(user, sessionStorage)
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY )).to.equal(user.username))
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect username to be set in session storage, when no storage provider is passed', (done) => {
+
+                expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null;
+
+                userData.logIn(user)
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY )).to.equal(user.username))
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect username to be set in local storage, when local storage is passed', (done) => {
+
+                expect(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null;
+
+                userData.logIn(user, localStorage)
+                    .then(() => expect(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.equal(user.username))
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect authKey to be set in session storage, when session storage is passed', (done) => {
+                
+                expect(sessionStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.null;
+
+                userData.logIn(user, sessionStorage)
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.equal('AUTHENTICATION_KEY'))
+                    .then(() => done())
+                    .catch(done);
+            });
+
+             it('expect authKey to be set in session storage, when no storage provider is passed', (done) => {
+                
+                expect(sessionStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.null;
+
+                userData.logIn(user)
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.equal('AUTHENTICATION_KEY'))
+                    .then(() => done())
+                    .catch(done);
+            });
+
+
+            it('expect authKey to be set in local storage, when local storage is passed', (done) => {
+
+                expect(localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.be.null;
+
+                userData.logIn(user, localStorage)
+                    .then(() => expect(localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)).to.equal('AUTHENTICATION_KEY'))
+                    .then(() => done())
+                    .catch(done);
+            });
+
+            it('expect login function to return a Promise', () => {
+
+                const promise = userData.logIn(user, localStorage);
+                expect(promise).to.be.an.instanceof(Promise);
+            });
+
+            it('expect login function to return a Promise which resolves with registered username', (done) => {
+
+                userData.logIn(user, localStorage)
+                    .then((value) => expect(value).to.deep.equal(user.username))
+                    .then(() => done())
+                    .catch(done);
+            });
+        });
+
+        describe('LogOut tests', () => {
 
             beforeEach(() => {
                 localStorage.clear();
@@ -144,7 +307,7 @@ describe('Data layer tests', () => {
                 userData.logOut()
                     .then(expect(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null)
                     .then(() => done())
-                    .catch(done);
+                    .catch(() => done());
 
             });
 
