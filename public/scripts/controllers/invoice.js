@@ -27,7 +27,10 @@ class InvoiceController {
   }
 
   post() {
+    //const newSeller = new Seller()
+    //const newInvoice = new Invoice(
 
+    //);
   }
 }
 
