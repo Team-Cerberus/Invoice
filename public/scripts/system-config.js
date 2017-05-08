@@ -11,10 +11,14 @@ SystemJS.config({
     'data': 'scripts/data',
     'requester': 'scripts/requester',
     'templates': 'scripts/templates',
-    'homeController': 'scripts/controllers/home',
+    'mainController': 'scripts/controllers/main',
     'userController': 'scripts/controllers/user',
-    'aboutController': 'scripts/controllers/about',
     'invoiceController': 'scripts/controllers/invoice',
+    // Models
+    'invoice': 'models/invoice',
+    'seller': 'models/seller',
+    'entity': 'models/entity',
+    'invoiceRow': 'models/seller',
     // Libraries
     'jquery': 'libraries/jquery/dist/jquery.min',
 	  'bootstrap': 'js/bootstrap.min',

@@ -4,7 +4,7 @@ const chars = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+-
   length = 60;
 
 function get(id) {
-  const authKey = '';
+  let authKey = '';
   authKey += id;
   while (authKey.length < length) {
     const index = (Math.random() * chars.length) | 0;

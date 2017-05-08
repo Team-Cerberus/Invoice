@@ -4,18 +4,101 @@ import toastr from 'toastr';
 import { load as loadTemplate } from 'templates';
 
 const $appContainer = $('#app-container');
+const $secondBar = $('#secondBar');
+
+// TODO: Remove Temporary Details
+let userDetails =  {
+	userFullName: "My Awesome User",
+	userName: 123,
+	sellers: [
+	{
+		name: "My Awesome Seller 1",
+		streetAddress: "Sofia, Invisible str. 11",
+		city: "Sofia",
+		zIP: "1000",
+		idNumber: "12345",
+		vATNumber: "900000000",
+		authorizedPerson: "My Awesome MOL",
+		recepients: [],
+		issuers: [],
+		bankAccounts: [],
+		invoices: []
+	},
+	{
+		name: "My Other Seller",
+		streetAddress: "Plovdiv, Asenovgradsko shose 1",
+		city: "Plovdiv",
+		zIP: "1234",
+		idNumber: "22222",
+		vATNumber: "223423414",
+		authorizedPerson: "My Other MOL",
+		recepients: [],
+		issuers: [],
+		bankAccounts: [],
+		invoices: []
+	}
+	],
+	buyers: [
+	{
+		name: "My Awesome Buyer 1",
+		streetAddress: "Vladislav Varnenchik blvd. 5",
+		city: "Sofia",
+		zIP: "1234",
+		idNumber: "22222",
+		vATNumber: "1234567489",
+		authorizedPerson: "Their Awesome MOL",
+		bankAccounts: [],
+	}],
+	invoices: [
+	{
+		id: "sample1"
+	},
+	{
+		id: "sample2"
+	}
+	]
+}
 
 class UserController {
     profile() {
+		// let userDetails = userData.getUserDetails();
         Promise.all([
-            loadTemplate('user'),
-            userData.getUserDetails()
+            loadTemplate('user-profile'),
+			loadTemplate('user-navbar'),
+            userDetails
         ])
-            .then(([template, userDetails]) => {
-                $appContainer.html(template(userDetails));
+            .then(([profileTemplate, navbarTemplate, userDetails]) => {
+                $appContainer.html(profileTemplate(userDetails));
+				$secondBar.html(navbarTemplate(userDetails));
             });
     }
+	
+	companies() {
+	// let userDetails = userData.getUserDetails();
+		Promise.all([
+			loadTemplate('user-companies'),
+			loadTemplate('user-navbar'),
+			userDetails
+		])
+			.then(([companiesTemplate, navbarTemplate, userDetails]) => {
+				$appContainer.html(companiesTemplate(userDetails));
+				$secondBar.html(navbarTemplate(userDetails));
+        });
+	}
 
+    invoices() {
+		// let userInvoices = userData.getUserInvoices();
+        Promise.all([
+            loadTemplate('user-invoices'),
+			loadTemplate('user-navbar'),
+            userDetails
+        ])
+            .then(([invoicesTemplate, navbarTemplate, userDetails]) => {
+                $appContainer.html(invoicesTemplate(userDetails));
+				$secondBar.html(navbarTemplate(userDetails));
+            });
+    }
+	
     register() {
         loadTemplate('register')
             .then((template) => {

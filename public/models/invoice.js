@@ -1,3 +1,7 @@
+import Entity from 'entity';
+import Seller from 'seller';
+import InvoiceRow from 'invoiceRow';
+
 class Invoice {
     constructor(number,
         dateOfIssue,
@@ -6,10 +10,11 @@ class Invoice {
         buyer,
         invoiceRows,
         transactionLocation,
-        payment,
-        explanation,
+        //payment,
+        //explanation,
         issuer,
-        recipient) {
+        recipient
+        ) {
 
         this._number = number;
         this._dateOfIssue = dateOfIssue;
@@ -25,12 +30,12 @@ class Invoice {
         }
 
         this._transactionLocation = transactionLocation;
-        this._payment = payment;
-        this._explanation = explanation;
-        this._totalVAT = this.invoiceRows.reduce((x, y) => x.rowVAT + y.rowVAT, 0);
-        this._totalNoVAT = this.invoiceRows.reduce((x, y) => x.rowPriceNoVAT + y.rowPriceNoVAT);
-        this._totalWithVAT = this.totalVAT + this.totalNoVAT;
-        this._totalInWords = numberToWords(this.totalWithVAT);
+        // this._payment = payment;
+        // this._explanation = explanation;
+        // this._totalVAT = this.invoiceRows.reduce((x, y) => x.rowVAT + y.rowVAT, 0);
+        // this._totalNoVAT = this.invoiceRows.reduce((x, y) => x.rowPriceNoVAT + y.rowPriceNoVAT);
+        // this._totalWithVAT = this.totalVAT + this.totalNoVAT;
+        // this._totalInWords = numberToWords(this.totalWithVAT);
         this._issuer = issuer;
         this._recipient = recipient;
     }
@@ -63,29 +68,29 @@ class Invoice {
         return this._transactionLocation;
     }
 
-    get payment() {
-        return this._payment;
-    }
+    // get payment() {
+    //     return this._payment;
+    // }
 
-    get explanation() {
-        return this._explanation;
-    }
+    // get explanation() {
+    //     return this._explanation;
+    // }
 
-    get totalVAT() {
-        return this._totalVAT;
-    }
+    // get totalVAT() {
+    //     return this._totalVAT;
+    // }
 
-    get totalNoVAT() {
-        return this._totalNoVAT;
-    }
+    // get totalNoVAT() {
+    //     return this._totalNoVAT;
+    // }
 
-    get totalWithVAT() {
-        return this._totalWithVAT;
-    }
+    // get totalWithVAT() {
+    //     return this._totalWithVAT;
+    // }
 
-    get totalInWords() {
-        return this._totalInWords;
-    }
+    // get totalInWords() {
+    //     return this._totalInWords;
+    // }
 
     get issuer() {
         return this._issuer;

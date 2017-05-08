@@ -1,6 +1,14 @@
 import $ from 'jquery';
 import { load as loadTemplate } from 'templates';
 import { sampleData } from 'devDataContainer';
+import Entity from 'entity';
+import Seller from 'seller';
+import InvoiceRow from 'invoiceRow';
+import Invoice from 'invoice';
+import { invoiceData } from 'data';
+import toastr from 'toastr';
+
+
 
 const $appContainer = $('#app-container');
 
@@ -10,9 +18,9 @@ class InvoiceController {
     let invoiceInstance; // = sampleData[id];   TODO: get invoice from the database
 
     Promise.all([
-        loadTemplate('invoice'),
-        invoiceInstance
-      ])
+      loadTemplate('invoice'),
+      invoiceInstance
+    ])
       .then(([template, invoiceInstance]) => {
         $appContainer.html(template(invoiceInstance));
       });
@@ -27,10 +35,56 @@ class InvoiceController {
   }
 
   post() {
-    //const newSeller = new Seller()
-    //const newInvoice = new Invoice(
+    const newSellerId = $('#sellerIdNumber');
 
-    //);
+    const newSeller = new Seller(
+      $('#sellerName').val(),
+      $('#sellerAddress').val(),
+      $('#sellerCity').val(),
+      $('#sellerZip').val(),
+      newSellerId,
+    );
+    const newBuyer = new Entity(
+      $('#buyerName').val(),
+      $('#buyerAddress').val(),
+      $('#buyerCity').val(),
+      $('#buyerZip').val(),
+      $('#buyerIdNumber').val()
+    );
+
+    const newInvoiceRows = [];
+    $('.invoice-row')
+      .toArray()
+      .forEach(
+      ($invoiceRow) => {
+        const newInvoiceRow = new InvoiceRow(
+          $invoiceRow.find('.product-id').val(),
+          $invoiceRow.find('.product-name').val(),
+          $invoiceRow.find('.product-unit').val(),
+          $invoiceRow.find('.product-quantity').val(),
+          $invoiceRow.find('.product-unit-price').val(),
+          $invoiceRow.find('.product-total-price').val(),
+        );
+        newInvoiceRows.push(newInvoiceRow);
+      }
+      );
+
+    const newInvoice = new Invoice(
+      $('#documentId').val(),
+      $('#documentDateIssued').val(),
+      $('#documentDateSale').val(),
+      newSellerId,
+      newBuyer,
+      newInvoiceRows,
+      $('#documentPlaceSale').val(),
+      $('#issuer').val(),
+      $('#recipient').val()
+    );
+    invoiceData.invoiceAdd(newInvoice)
+      .then((invoice) => {
+        location.href = '#/invoice';
+        toastr.success(`${invoice.number} was added successfully!`);
+      }).catch(error => toastr.error(error.responseText));
   }
 }
 
