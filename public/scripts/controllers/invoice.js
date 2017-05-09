@@ -1,28 +1,35 @@
 import $ from 'jquery';
 import { load as loadTemplate } from 'templates';
-import { sampleData } from 'devDataContainer';
 import Entity from 'entity';
 import Seller from 'seller';
 import InvoiceRow from 'invoiceRow';
 import Invoice from 'invoice';
 import { userData } from 'data';
 import toastr from 'toastr';
-
-
+import { userData } from 'data';
 
 const $appContainer = $('#app-container');
 
 class InvoiceController {
+	getInvoice() {
+		Promise.all([
+			loadTemplate('invoice'),
+			userData.getUserDetails()
+		])
+			.then(([companiesTemplate, userDetails]) => {
+				$appContainer.html(companiesTemplate(userDetails.result));
+		});
+	}
+		
   get(invoiceNumber) {
-    //let { id } = params;
-    let invoiceInstance; // = sampleData[id];   TODO: get invoice from the database
 
     Promise.all([
       loadTemplate('invoice'),
-      invoiceInstance
+      userData.getInvoiceDetails()
     ])
-      .then(([template, invoiceInstance]) => {
-        $appContainer.html(template(invoiceInstance));
+      .then(([template, invoiceDetails]) => {
+		  console.log(invoiceDetails);
+        $appContainer.html(invoiceDetails.resullt);
       });
   }
 
