@@ -20,6 +20,7 @@ router
   .on('/user/:username/invoices', userController.invoices)
   .on('/user/:username/invoices/:id', invoiceController.getInvoice)
   .on('/invoice', invoiceController.get)
+  .on('/invoice/create/:type', invoiceController.createNewInvoice)
   .on('/invoice/addrow', invoiceController.addInvoiceRow)
   .on('/api/invoice/post', invoiceController.postInvoice)
   .on('/invoice/:id', invoiceController.get);

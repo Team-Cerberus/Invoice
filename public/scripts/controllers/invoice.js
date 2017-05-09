@@ -10,16 +10,16 @@ import toastr from 'toastr';
 const $appContainer = $('#app-container');
 
 class InvoiceController {
-	getInvoice() {
-		Promise.all([
-			loadTemplate('invoice'),
-			userData.getUserDetails()
-		])
-			.then(([companiesTemplate, userDetails]) => {
-				$appContainer.html(companiesTemplate(userDetails.result));
-		});
-	}
-		
+  getInvoice() {
+    Promise.all([
+      loadTemplate('invoice'),
+      userData.getUserDetails()
+    ])
+      .then(([companiesTemplate, userDetails]) => {
+        $appContainer.html(companiesTemplate(userDetails.result));
+      });
+  }
+
   get(invoiceNumber) {
 
     Promise.all([
@@ -27,7 +27,7 @@ class InvoiceController {
       userData.getInvoiceDetails()
     ])
       .then(([template, invoiceDetails]) => {
-		  console.log(invoiceDetails);
+        console.log(invoiceDetails);
         $appContainer.html(invoiceDetails.resullt);
       });
   }
@@ -49,6 +49,15 @@ class InvoiceController {
       newSellerId,
     );
 
+  }
+
+  createNewInvoice(invoice) {
+    const type = (invoice.type === 'copy') ? {document:{'document-is-original': 'Copy'}} : {document:{'document-is-original': 'Original'}};
+
+    loadTemplate('invoice')
+      .then((template) => {
+        $appContainer.html(template(type));
+      });
   }
 
   postInvoice() {
@@ -73,18 +82,18 @@ class InvoiceController {
 
     const $invoiceRow = $('.invoice-row');
 
-    for(let i=0; i<$invoiceRow.length; i+=1) {
-        let productId = $invoiceRow.find('.product-id').val();
-        let newInvoiceRow = new InvoiceRow(
-          productId,
-          $invoiceRow.find('.product-name').val(),
-          $invoiceRow.find('.product-unit').val(),
-          $invoiceRow.find('.product-quantity').val(),
-          $invoiceRow.find('.product-unit-price').val(),
-          $invoiceRow.find('.product-total-price').val(),
-        );
+    for (let i = 0; i < $invoiceRow.length; i += 1) {
+      let productId = $invoiceRow.find('.product-id').val();
+      let newInvoiceRow = new InvoiceRow(
+        productId,
+        $invoiceRow.find('.product-name').val(),
+        $invoiceRow.find('.product-unit').val(),
+        $invoiceRow.find('.product-quantity').val(),
+        $invoiceRow.find('.product-unit-price').val(),
+        $invoiceRow.find('.product-total-price').val(),
+      );
 
-        newInvoiceRows.push(newInvoiceRow);     
+      newInvoiceRows.push(newInvoiceRow);
     }
 
     // $('.invoice-row')

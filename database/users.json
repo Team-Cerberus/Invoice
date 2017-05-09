@@ -45,10 +45,10 @@
           "idNumber": "12345",
           "vATNumber": "900000000",
           "authorizedPerson": "My Awesome MOL",
-          "recepients": [ ],
-          "issuers": [ ],
-          "bankAccounts": [ ],
-          "invoices": [ ]
+          "recepients": [],
+          "issuers": [],
+          "bankAccounts": [],
+          "invoices": []
         },
         {
           "name": "My Other Seller",
@@ -58,10 +58,10 @@
           "idNumber": "22222",
           "vATNumber": "223423414",
           "authorizedPerson": "My Other MOL",
-          "recepients": [ ],
-          "issuers": [ ],
-          "bankAccounts": [ ],
-          "invoices": [ ]
+          "recepients": [],
+          "issuers": [],
+          "bankAccounts": [],
+          "invoices": []
         }
       ],
       "buyers": [
@@ -73,7 +73,7 @@
           "idNumber": "22222",
           "vATNumber": "1234567489",
           "authorizedPerson": "Their Awesome MOL",
-          "bankAccounts": [ ]
+          "bankAccounts": []
         }
       ],
       "invoices": [
@@ -99,6 +99,12 @@
           "total": "150.34"
         }
       ]
+    },
+    {
+      "userName": "ludzhev",
+      "passHash": "97cbb8a3a6aade1802a465dd0fd6fe03be8dce2e",
+      "userNameLower": "ludzhev",
+      "authKey": "97cbb8a3a6aade1802a465dd0fd6fe03be8dce2eMTg)YZXlZ)-=tONJzeGo"
     }
   ]
 }
