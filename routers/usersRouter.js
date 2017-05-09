@@ -1,4 +1,5 @@
 const express = require('express'),
+  logger = require('../scripts/config/logger'),
   authKeyGenerator = require('../authentication/auth-key-generator'),
   router = express.Router();
 
@@ -8,11 +9,11 @@ function configure(db) {
     .post('/', (req, res) => {
       const user = req.body;
 
-      user.usernameLower = user.username.toLowerCase();
-      user.authKey = authKeyGenerator.get(user.id);
+      user.userNameLower = user.userName.toLowerCase();
+      user.authKey = authKeyGenerator.get(user.passHash);
 
       if (db.get('users').find({
-        usernameLower: user.usernameLower
+        userNameLower: user.userNameLower
       })
         .value()) {
 
@@ -33,7 +34,7 @@ function configure(db) {
       const user = req.body;
 
       const dbUser = db.get('users').find({
-        usernameLower: user.username.toLowerCase()
+        userNameLower: user.userName.toLowerCase()
       }).value();
 
       if (!dbUser || dbUser.passHash !== user.passHash) {
@@ -45,19 +46,22 @@ function configure(db) {
       res.status(200)
         .json({
           result: {
-            username: dbUser.username,
+            userName: dbUser.userName,
             authKey: dbUser.authKey
           }
         });
     })
     .get('/', (req, res) => {
+      const user = req.user;
+      if (!user) {
+        res.status(401)
+          .json('Not authorized User');
+        return;
+      }
 
-      // TODO: Implement real logic
       res.status(200)
         .json({
-          result: {
-           //
-          }
+          result: user
         });
     });
 

@@ -8,15 +8,15 @@ let storageProvider;
 
 function register(user) {
     const body = {
-        username: user.username,
-        passHash: CryptoJS.SHA1(user.username + user.password).toString()
+        userName: user.userName,
+        passHash: CryptoJS.SHA1(user.userName + user.password).toString()
     };
 
-    return requester.post('api/users', body)
+    return requester.post('users', body)
         .then((response) => {
             const user = response.result;
 
-            return Promise.resolve(user.username);
+            return Promise.resolve(user.userName);
         }).catch(err => {
             return Promise.reject(err);
         });
@@ -27,18 +27,18 @@ function logIn(user, storage) {
     storageProvider = storage || sessionStorage;
 
     const body = {
-        username: user.username,
-        passHash: CryptoJS.SHA1(user.username + user.password).toString()
+        userName: user.userName,
+        passHash: CryptoJS.SHA1(user.userName + user.password).toString()
     };
 
-    return requester.put('api/users/auth', body)
+    return requester.put('users/auth', body)
         .then((response) => {
             const user = response.result;
 
-            storageProvider.setItem(LOCAL_STORAGE_USERNAME_KEY, user.username);
+            storageProvider.setItem(LOCAL_STORAGE_USERNAME_KEY, user.userName);
             storageProvider.setItem(LOCAL_STORAGE_AUTHKEY_KEY, user.authKey);
 
-            return Promise.resolve(user.username)
+            return Promise.resolve(user.userName)
         }).catch(err => {
             return Promise.reject(err);
         });
@@ -80,7 +80,7 @@ function getUserDetails() {
         'x-auth-key': storageProvider.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
     };
 
-    return requester.get('api/users', headers);
+    return requester.get('users', headers);
 }
 
 function getSellers() {

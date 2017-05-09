@@ -6,66 +6,12 @@ import { load as loadTemplate } from 'templates';
 const $appContainer = $('#app-container');
 const $secondBar = $('#secondBar');
 
-// TODO: Remove Temporary Details
-let userDetails =  {
-	userFullName: "My Awesome User",
-	userName: 123,
-	sellers: [
-	{
-		name: "My Awesome Seller 1",
-		streetAddress: "Sofia, Invisible str. 11",
-		city: "Sofia",
-		zIP: "1000",
-		idNumber: "12345",
-		vATNumber: "900000000",
-		authorizedPerson: "My Awesome MOL",
-		recepients: [],
-		issuers: [],
-		bankAccounts: [],
-		invoices: []
-	},
-	{
-		name: "My Other Seller",
-		streetAddress: "Plovdiv, Asenovgradsko shose 1",
-		city: "Plovdiv",
-		zIP: "1234",
-		idNumber: "22222",
-		vATNumber: "223423414",
-		authorizedPerson: "My Other MOL",
-		recepients: [],
-		issuers: [],
-		bankAccounts: [],
-		invoices: []
-	}
-	],
-	buyers: [
-	{
-		name: "My Awesome Buyer 1",
-		streetAddress: "Vladislav Varnenchik blvd. 5",
-		city: "Sofia",
-		zIP: "1234",
-		idNumber: "22222",
-		vATNumber: "1234567489",
-		authorizedPerson: "Their Awesome MOL",
-		bankAccounts: [],
-	}],
-	invoices: [
-	{
-		id: "sample1"
-	},
-	{
-		id: "sample2"
-	}
-	]
-}
-
 class UserController {
     profile() {
-		// let userDetails = userData.getUserDetails();
         Promise.all([
             loadTemplate('user-profile'),
 			loadTemplate('user-navbar'),
-            userDetails
+            userData.getUserDetails()
         ])
             .then(([profileTemplate, navbarTemplate, userDetails]) => {
                 $appContainer.html(profileTemplate(userDetails));
@@ -74,24 +20,22 @@ class UserController {
     }
 	
 	companies() {
-	// let userDetails = userData.getUserDetails();
 		Promise.all([
 			loadTemplate('user-companies'),
 			loadTemplate('user-navbar'),
-			userDetails
+			userData.getUserDetails()
 		])
 			.then(([companiesTemplate, navbarTemplate, userDetails]) => {
-				$appContainer.html(companiesTemplate(userDetails));
-				$secondBar.html(navbarTemplate(userDetails));
+				$appContainer.html(companiesTemplate(userDetails.result));
+				$secondBar.html(navbarTemplate(userDetails.result));
         });
 	}
 
     invoices() {
-		// let userInvoices = userData.getUserInvoices();
         Promise.all([
             loadTemplate('user-invoices'),
 			loadTemplate('user-navbar'),
-            userDetails
+            userData.getUserDetails()
         ])
             .then(([invoicesTemplate, navbarTemplate, userDetails]) => {
                 $appContainer.html(invoicesTemplate(userDetails));
@@ -109,7 +53,7 @@ class UserController {
                     // TODO: Client-side validations for username and password.
 
                     const user = {
-                        username: $('#tb-reg-username').val(),
+                        userName: $('#tb-reg-username').val(),
                         password: $('#tb-reg-pass').val()
                     };
 
@@ -127,7 +71,7 @@ class UserController {
         const $password = $('#input-password');
         const $remember = $('#remember');
         const user = {
-            username: $username.val(),
+            userName: $username.val(),
             password: $password.val()
         };
 
