@@ -11,15 +11,13 @@ const $appContainer = $('#app-container');
 
 class InvoiceController {
   get(invoiceNumber) {
-    //let { id } = params;
-    let invoiceInstance; // = sampleData[id];   TODO: get invoice from the database
 
     Promise.all([
       loadTemplate('invoice'),
-      invoiceInstance
+      userData.getUserDetails()
     ])
-      .then(([template, invoiceInstance]) => {
-        $appContainer.html(template(invoiceInstance));
+      .then(([template, userDetails]) => {
+        $appContainer.html(userDetails.resullt);
       });
   }
 
