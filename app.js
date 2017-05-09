@@ -8,6 +8,7 @@ const express = require('express'),
 
 app.use(express.static(__dirname + '/public'));
 app.use('/libraries', express.static('node_modules'));
+app.use('/resources', express.static('resources'));
 
 db._.mixin(require('underscore-db'));
 
