@@ -5,6 +5,9 @@ module.exports = function (db) {
 
     router
         .get('/invoice', function (req, res) {
+
+            console.log(req);
+
             const user = req.user;
             if (!user) {            //copied this from self-manager. It obviously requires user authentication
                 res.status(401)
@@ -36,6 +39,8 @@ module.exports = function (db) {
                 });
         })
         .post('/invoice', function (req, res) {
+            console.log(req);
+
             const user = req.user;
             if (!user) {            //copied this from self-manager. It obviously requires user authentication
                 res.status(401)
@@ -78,6 +83,8 @@ module.exports = function (db) {
                 );
         })
         .put('/invoice', function (req, res) {
+        console.log(req);
+
             const user = req.user;
             if (!user) {            //copied this from self-manager. It obviously requires user authentication
                 res.status(401)

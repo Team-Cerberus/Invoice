@@ -179,6 +179,7 @@ function invoiceAdd(invoice) {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
         }
     };
+    console.log(invoice);
     return requester.post('/invoices', options)
         .then(function (resp) {
             return resp.result;

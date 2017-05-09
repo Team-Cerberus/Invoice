@@ -2,7 +2,7 @@ import Entity from 'entity';
 import Seller from 'seller';
 import InvoiceRow from 'invoiceRow';
 
-class Invoice {
+export default class Invoice {
     constructor(number,
         dateOfIssue,
         dateTaxEvent,
@@ -101,4 +101,3 @@ class Invoice {
     }
 }
 
-export default new Invoice();

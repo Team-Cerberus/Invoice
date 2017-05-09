@@ -5,7 +5,7 @@ import Entity from 'entity';
 import Seller from 'seller';
 import InvoiceRow from 'invoiceRow';
 import Invoice from 'invoice';
-import { invoiceData } from 'data';
+import { userData } from 'data';
 import toastr from 'toastr';
 
 
@@ -34,7 +34,18 @@ class InvoiceController {
     //location.hash = '#/invoice/addrow';
   }
 
-  post() {
+  postSeller() {
+    const newSeller = new Seller(
+      $('#sellerName').val(),
+      $('#sellerAddress').val(),
+      $('#sellerCity').val(),
+      $('#sellerZip').val(),
+      newSellerId,
+    );
+
+  }
+
+  postInvoice() {
     const newSellerId = $('#sellerIdNumber');
 
     const newSeller = new Seller(
@@ -53,21 +64,39 @@ class InvoiceController {
     );
 
     const newInvoiceRows = [];
-    $('.invoice-row')
-      .toArray()
-      .forEach(
-      ($invoiceRow) => {
-        const newInvoiceRow = new InvoiceRow(
-          $invoiceRow.find('.product-id').val(),
+
+    const $invoiceRow = $('.invoice-row');
+
+    for(let i=0; i<$invoiceRow.length; i+=1) {
+        let productId = $invoiceRow.find('.product-id').val();
+        let newInvoiceRow = new InvoiceRow(
+          productId,
           $invoiceRow.find('.product-name').val(),
           $invoiceRow.find('.product-unit').val(),
           $invoiceRow.find('.product-quantity').val(),
           $invoiceRow.find('.product-unit-price').val(),
           $invoiceRow.find('.product-total-price').val(),
         );
-        newInvoiceRows.push(newInvoiceRow);
-      }
-      );
+
+        newInvoiceRows.push(newInvoiceRow);     
+    }
+
+    // $('.invoice-row')
+    //   .toArray()
+    //   .forEach(
+    //   (invoiceRow) => {
+    //     Console.log($(invoiceRow));
+    //     const newInvoiceRow = new InvoiceRow(
+    //       $(invoiceRow).find('.product-id').val(),
+    //       $invoiceRow.find('.product-name').val(),
+    //       $invoiceRow.find('.product-unit').val(),
+    //       $invoiceRow.find('.product-quantity').val(),
+    //       $invoiceRow.find('.product-unit-price').val(),
+    //       $invoiceRow.find('.product-total-price').val(),
+    //     );
+    //     newInvoiceRows.push(newInvoiceRow);
+    //   }
+    //   );
 
     const newInvoice = new Invoice(
       $('#documentId').val(),
@@ -80,9 +109,10 @@ class InvoiceController {
       $('#issuer').val(),
       $('#recipient').val()
     );
-    invoiceData.invoiceAdd(newInvoice)
+
+    userData.invoiceAdd(newInvoice)
       .then((invoice) => {
-        location.href = '#/invoice';
+        //location.href = '#/invoice';
         toastr.success(`${invoice.number} was added successfully!`);
       }).catch(error => toastr.error(error.responseText));
   }

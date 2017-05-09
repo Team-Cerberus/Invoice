@@ -1,6 +1,6 @@
 import Entity from 'entity';
 
-class Seller extends Entity {
+export default class Seller extends Entity {
 
     constructor(
         name,
@@ -57,4 +57,3 @@ class Seller extends Entity {
     // }
 }
 
-export default new Seller();
