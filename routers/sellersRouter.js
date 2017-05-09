@@ -6,7 +6,7 @@ module.exports = function (db) {
     router
         .get('/sellers', function (req, res) {
             const user = req.user;
-            if (!user) {            //copied this from self-manager. It obviously requires user authentication
+            if (!user) {            
                 res.status(401)
                     .json('Not authorized User');
                 return;
@@ -28,15 +28,16 @@ module.exports = function (db) {
         })
         .post('/sellers', function (req, res) {
             const user = req.user;
-            if (!user) {            //copied this from self-manager. It obviously requires user authentication
+            if (!user) {            
                 res.status(401)
                     .json('Not authorized User');
                 return;
             }
 
+            let userInDB = req.body.user;
             const dbUser = db.get('users')
                 .find({
-                    username: user.username.toLowerCase()
+                    username: userInDB
                 })
                 .value();
             const sellers = dbUser.get('sellers');
@@ -63,7 +64,7 @@ module.exports = function (db) {
         })
         .put('/sellers', function (req, res) {
             const user = req.user;
-            if (!user) {            //copied this from self-manager. It obviously requires user authentication
+            if (!user) {            
                 res.status(401)
                     .json('Not authorized User');
                 return;

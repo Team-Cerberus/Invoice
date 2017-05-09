@@ -104,7 +104,10 @@ function getSellers() {
 }
 
 function sellerAdd(seller) {
+    const username = storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY);
+
     var options = {
+        user : username,      
         data: seller,
         headers: {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
@@ -117,8 +120,11 @@ function sellerAdd(seller) {
 }
 
 function sellerUpdate(seller) {
+    const username = storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY);
+
     var options = {
         data: seller,
+        user: username,
         headers: {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
         }
@@ -185,6 +191,7 @@ function invoiceAdd(invoice) {
 
     var options = {
         user : username,
+        sellerIDNumber: invoice._seller._sellerIdNumber,
         data: invoice,
         headers: {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
