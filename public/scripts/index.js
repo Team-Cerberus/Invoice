@@ -20,7 +20,7 @@ router
   .on('/user/:username/invoices', userController.invoices)
   .on('/invoice', invoiceController.get)
   .on('/invoice/addrow', invoiceController.addInvoiceRow)
-  .on('/invoice/post', invoiceController.postInvoice)
+  .on('/api/invoice/post', invoiceController.postInvoice)
   .on('/invoice/:id', invoiceController.get);
 
 $(window).on('hashchange', () => router.navigate());

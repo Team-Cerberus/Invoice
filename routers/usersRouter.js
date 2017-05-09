@@ -23,6 +23,7 @@ function configure(db) {
       db.get('users')
         .value()
         .push(user);
+      db.write();
 
       res.status(200)
         .json({
@@ -56,7 +57,7 @@ function configure(db) {
       res.status(200)
         .json({
           result: {
-           //
+            //
           }
         });
     });
