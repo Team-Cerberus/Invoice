@@ -106,8 +106,8 @@ function getSellers() {
 function sellerAdd(seller) {
     const username = storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY);
 
-    var options = {
-        user : username,      
+    const options = {
+        user: username,
         data: seller,
         headers: {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
@@ -122,7 +122,7 @@ function sellerAdd(seller) {
 function sellerUpdate(seller) {
     const username = storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY);
 
-    var options = {
+    const options = {
         data: seller,
         user: username,
         headers: {
@@ -149,7 +149,7 @@ function getBuyers() {
 }
 
 function buyerAdd(buyer) {
-    var options = {
+    const options = {
         data: buyer,
         headers: {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
@@ -162,7 +162,7 @@ function buyerAdd(buyer) {
 }
 
 function buyerUpdate(buyer) {
-    var options = {
+    const options = {
         data: buyer,
         headers: {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
@@ -189,15 +189,15 @@ function getInvoices() {            //TODO: For a single invoice and for the las
 function invoiceAdd(invoice) {
     const username = storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY);
 
-    var options = {
-        user : username,
+    const options = {
+        user: username,
         sellerIDNumber: invoice._seller._sellerIdNumber,
         data: invoice,
         headers: {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
         }
     };
-    //console.log(invoice);
+    
     return requester.post('api/invoice', options)
         .then(function (resp) {
             return resp.result;
@@ -205,7 +205,7 @@ function invoiceAdd(invoice) {
 }
 
 function invoiceUpdate(invoice) {
-    var options = {
+    const options = {
         data: invoice,
         headers: {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
