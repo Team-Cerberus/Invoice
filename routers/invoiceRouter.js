@@ -50,50 +50,29 @@ module.exports = function (db) {
                 return;
             }
 
-            let userInDB = req.body.user; //.toLowerCase();
-
+            let userInDB = req.body.user; 
+            console.log('user: ' + userInDB);
+            console.log('seller:' + req.body.sellerIDNumber);
+            console.log('body:' + req.body.data);
             db.get('users')
                 .find(
-                    { username: userInDB }
+                { username: userInDB }
                 )
                 .get('sellers')
                 .find({
                     idNumber: req.body.sellerIDNumber
                 })
                 .get('invoices')
-                .push(req.body.data)
+                .push(req.body)
                 .write();
 
+            test = db.get('users')
+                .find(
+                { username: userInDB }
+                )
+            console.log(test);
+            console.log(test.value);
 
-            // const dbUser = db.get('users')
-            //     .find({
-            //         username: userInDB
-            //     })
-            // console.log(dbUser.value());
-
-            // const seller = db.get('users')
-            //     .find(
-            //     { username: userInDB }
-            //     )
-            //     .get('sellers')
-            //     .find({
-            //         idNumber: req.body.sellerIDNumber
-            //     });
-            // console.log(seller.value());
-
-            // const invoices = seller.get('invoices');
-            // console.log(invoices.value());
-
-            // if (!invoices) {
-            //     seller
-            //         .set('invoices', [])
-            //         .write();
-            //     invoices = seller.get('invoices');
-            // }
-
-            // invoices
-            //     .push(req.body.data)
-            //     .write();
             res.status(201)
                 .json({
                     result: user
