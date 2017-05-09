@@ -6,44 +6,50 @@ import { load as loadTemplate } from 'templates';
 const $appContainer = $('#app-container');
 const $secondBar = $('#secondBar');
 
+const USERNAME_PATTERN = /^[A-Za-z0-9_]{5,10}$/,
+    PASSWORD_PATTERN = /^[A-Za-z0-9_]{3,10}$/,
+    INVALID_USERNAME_MESSAGE = 'Username must be between 5 and 10 characters long and to consist only of latin letters, digits and _!',
+    INVALID_PASSWORD_MESSAGE = 'Password must be between 3 and 10 characters long and to consist only of latin letters, digits and _!',
+    INVALID_PASSWORD_CONFIRMATION_MESSAGE = 'Confirm password!';
+
 class UserController {
     profile() {
         Promise.all([
             loadTemplate('user-profile'),
-			loadTemplate('user-navbar'),
+            loadTemplate('user-navbar'),
             userData.getUserDetails()
-			
+
         ])
             .then(([profileTemplate, navbarTemplate, userDetails]) => {
                 $appContainer.html(profileTemplate(userDetails.result));
-				$secondBar.html(navbarTemplate(userDetails.result));
+                $secondBar.html(navbarTemplate(userDetails.result));
             });
     }
-	
-	companies() {
-		Promise.all([
-			loadTemplate('user-companies'),
-			loadTemplate('user-navbar'),
-			userData.getUserDetails()
-		])
-			.then(([companiesTemplate, navbarTemplate, userDetails]) => {
-				$appContainer.html(companiesTemplate(userDetails.result));
-				$secondBar.html(navbarTemplate(userDetails.result));
-        });
-	}
+
+    companies() {
+        Promise.all([
+            loadTemplate('user-companies'),
+            loadTemplate('user-navbar'),
+            userData.getUserDetails()
+        ])
+            .then(([companiesTemplate, navbarTemplate, userDetails]) => {
+                $appContainer.html(companiesTemplate(userDetails.result));
+                $secondBar.html(navbarTemplate(userDetails.result));
+            });
+    }
 
     invoices() {
         Promise.all([
             loadTemplate('user-invoices'),
-			loadTemplate('user-navbar'),
+            loadTemplate('user-navbar'),
             userData.getUserDetails()
         ])
             .then(([invoicesTemplate, navbarTemplate, userDetails]) => {
                 $appContainer.html(invoicesTemplate(userDetails.result));
-				$secondBar.html(navbarTemplate(userDetails.result));
+                $secondBar.html(navbarTemplate(userDetails.result));
             });
     }
-	
+
     register() {
         loadTemplate('register')
             .then((template) => {
@@ -51,7 +57,26 @@ class UserController {
 
                 $('#btn-register').on('click', () => {
 
-                    // TODO: Client-side validations for username and password.
+                    const $username = $('#tb-reg-username').val(),
+                        $password = $('#tb-reg-pass').val(),
+                        $passwordConfirm = $('#tb-reg-pass-confirm').val();
+
+                    if (!USERNAME_PATTERN.test($username)) {
+                        $('#tb-reg-username').val('');
+                        $('#tb-reg-pass').val('');
+                        $('#tb-reg-pass-confirm').val('');
+                        toastr.error(INVALID_USERNAME_MESSAGE);
+                        return;
+                    } else if (!PASSWORD_PATTERN.test($password)) {
+                        $('#tb-reg-pass').val('');
+                        $('#tb-reg-pass-confirm').val('');
+                        toastr.error(INVALID_PASSWORD_MESSAGE);
+                        return;
+                    } else if ($password !== $passwordConfirm) {
+                        $('#tb-reg-pass-confirm').val('');
+                        toastr.error(INVALID_PASSWORD_CONFIRMATION_MESSAGE);
+                        return;
+                    }
 
                     const user = {
                         userName: $('#tb-reg-username').val(),
@@ -92,16 +117,17 @@ class UserController {
             }).catch(error => {
                 location.href = `#/home`;
                 toastr.error(error.responseText);
-                });
+            });
     }
 
     logOut() {
-      userData.logOut()
-        .then((username) => {
-              $('#user-log-out').addClass('hidden');
-              $('#user-navbar').addClass('hidden');
-              $('#user-log-in').removeClass('hidden');
-              toastr.success(`GoodBye, ${username}!`);
+        userData.logOut()
+            .then((username) => {
+                $('#user-log-out').addClass('hidden');
+                $('#user-navbar').addClass('hidden');
+                $('#user-log-in').removeClass('hidden');
+                location.href = `#/home`;
+                toastr.success(`GoodBye, ${username}!`);
             }).catch(errorMsg => toastr.error(errorMsg));
     }
 
@@ -109,9 +135,9 @@ class UserController {
         const user = userData.hasUser(localStorage);
 
         if (user) {
-          $('#username').html(user.username);
-          $('#user-log-out').removeClass('hidden');
-          $('#user-navbar').removeClass('hidden');
+            $('#username').html(user.username);
+            $('#user-log-out').removeClass('hidden');
+            $('#user-navbar').removeClass('hidden');
         }
         else {
             $('#user-log-in').removeClass('hidden');
