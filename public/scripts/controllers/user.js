@@ -12,9 +12,10 @@ class UserController {
             loadTemplate('user-profile'),
 			loadTemplate('user-navbar'),
             userData.getUserDetails()
+			
         ])
             .then(([profileTemplate, navbarTemplate, userDetails]) => {
-                $appContainer.html(profileTemplate(userDetails));
+                $appContainer.html(profileTemplate(userDetails.result));
 				$secondBar.html(navbarTemplate(userDetails.result));
             });
     }
@@ -38,7 +39,7 @@ class UserController {
             userData.getUserDetails()
         ])
             .then(([invoicesTemplate, navbarTemplate, userDetails]) => {
-                $appContainer.html(invoicesTemplate(userDetails));
+                $appContainer.html(invoicesTemplate(userDetails.result));
 				$secondBar.html(navbarTemplate(userDetails.result));
             });
     }

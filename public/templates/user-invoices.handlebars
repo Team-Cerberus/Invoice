@@ -1,11 +1,11 @@
 <div class="container panel panel-default">
 	<div class="row">
         <h2>Invoices for user <span class='label'>{{userName}}</span></h2>
-		<h3>My sellers</h3>
+		<h3>Invoices</h3>
 		<div class="list-group">
 			{{#each invoices}}
-				<a href="#" class="list-group-item">{{id}}</a>
+				<a href="#/user/{{userName}}/invoices/{{id}}" class="list-group-item">{{id}}</a>
 			{{/each}}
 		</div>
 	</div>
-</div> 
+</div>
