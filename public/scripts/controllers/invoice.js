@@ -61,7 +61,7 @@ class InvoiceController {
   }
 
   postInvoice() {
-    const newSellerId = $('#sellerIdNumber');
+    const newSellerId = $('#sellerIdNumber').val();
 
     const newSeller = new Seller(
       $('#sellerName').val(),

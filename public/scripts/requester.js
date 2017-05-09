@@ -1,7 +1,10 @@
 import $ from 'jquery';
 
 function request(url, type, body, headers) {
+<<<<<<< HEAD
   
+=======
+>>>>>>> a68b683448c4415cab28901d6362217235f56925
   const promise = new Promise((resolve, reject) => {
     $.ajax({
       url,

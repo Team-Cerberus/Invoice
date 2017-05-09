@@ -47,41 +47,52 @@ module.exports = function (db) {
 
             let userInDB = req.body.user; //.toLowerCase();
 
-            const dbUser = db.get('users')
-                .find({
-                    username: userInDB
-                })
-
-            const seller = db.get('users')
+            db.get('users')
                 .find(
-                { username: userInDB }
+                    { username: userInDB }
                 )
                 .get('sellers')
                 .find({
-                    idNumber: req.seller.idNumber
+                    idNumber: req.body.sellerIDNumber
+                })
+                .get('invoices')
+                .push(req.body.data)
+                .write();
+
+
+            // const dbUser = db.get('users')
+            //     .find({
+            //         username: userInDB
+            //     })
+            // console.log(dbUser.value());
+
+            // const seller = db.get('users')
+            //     .find(
+            //     { username: userInDB }
+            //     )
+            //     .get('sellers')
+            //     .find({
+            //         idNumber: req.body.sellerIDNumber
+            //     });
+            // console.log(seller.value());
+
+            // const invoices = seller.get('invoices');
+            // console.log(invoices.value());
+
+            // if (!invoices) {
+            //     seller
+            //         .set('invoices', [])
+            //         .write();
+            //     invoices = seller.get('invoices');
+            // }
+
+            // invoices
+            //     .push(req.body.data)
+            //     .write();
+            res.status(201)
+                .json({
+                    result: user
                 });
-
-            const invoices = seller.get('invoices');
-            if (!invoices) {
-                seller
-                    .set('invoices', [])
-                    .write()
-                    .then(
-                    () => invoices = dbUser.get('invoices')
-                    );
-            }
-
-            invoices
-                .push(req.invoice)
-                .write()
-                .then(
-                () => {
-                    res.status(201)
-                        .json({
-                            result: user
-                        });
-                }
-                );
         })
         .put('/', function (req, res) {
             

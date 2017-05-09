@@ -191,7 +191,7 @@ function invoiceAdd(invoice) {
 
     const options = {
         user: username,
-        sellerIDNumber: invoice._seller._sellerIdNumber,
+        sellerIDNumber: invoice._sellerIdNumber,
         data: invoice,
         headers: {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
