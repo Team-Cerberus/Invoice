@@ -104,7 +104,38 @@
       "userName": "stefan-new",
       "passHash": "d4d31573eca18a0c0b6b382c676f8750e1793210",
       "userNameLower": "stefan-new",
-      "authKey": "d4d31573eca18a0c0b6b382c676f8750e1793210uIMDAgxcYLsdmcFt!hZn"
+      "authKey": "d4d31573eca18a0c0b6b382c676f8750e1793210uIMDAgxcYLsdmcFt!hZn",
+      "sellers": [
+        {
+          "name": "The Company Ltd",
+          "streetAddress": "Sofia, Invisible str. 11",
+          "city": "Sofia",
+          "zIP": "1000",
+          "idNumber": "12345",
+          "vATNumber": "900000000",
+          "authorizedPerson": "Pesho",
+          "recepients": [],
+          "issuers": [],
+          "bankAccounts": [],
+          "invoices": []
+        },
+        {
+          "name": "OOD Ltd",
+          "streetAddress": "Plovdiv, Asenovgradsko shose 1",
+          "city": "Plovdiv",
+          "zIP": "1234",
+          "idNumber": "22222",
+          "vATNumber": "223423414",
+          "authorizedPerson": "My Other MOL",
+          "recepients": [],
+          "issuers": [],
+          "bankAccounts": [],
+          "invoices": []
+        }
+      ],
+      "buyers":[
+        
+      ]
     },
     {
       "userName": "ludzhev",
