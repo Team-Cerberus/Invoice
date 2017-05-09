@@ -6,9 +6,6 @@ module.exports = function (db) {
     router
         .get('/', function (req, res) {
 
-            console.log('start:');
-            console.log(req.body);
-
             const user = req.user;
             if (!user) {
                 res.status(401)
@@ -40,9 +37,7 @@ module.exports = function (db) {
                 });
         })
         .post('/', function (req, res) {
-            console.log('start:');
-            console.log(req.body);
-
+           
             const user = req.user;
             if (!user) {
                 res.status(401)
@@ -51,7 +46,6 @@ module.exports = function (db) {
             }
 
             let userInDB = req.body.user; //.toLowerCase();
-            console.log(userInDB);
 
             const dbUser = db.get('users')
                 .find({
@@ -90,9 +84,7 @@ module.exports = function (db) {
                 );
         })
         .put('/', function (req, res) {
-            console.log('start:');
-            console.log(req.body);
-
+            
             const user = req.user;
             if (!user) {
                 res.status(401)

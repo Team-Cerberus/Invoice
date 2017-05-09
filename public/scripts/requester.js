@@ -1,11 +1,7 @@
 import $ from 'jquery';
 
 function request(url, type, body, headers) {
-  console.log('requester')
-  console.log(url);
-  console.log(type);
-  console.log(body);
-  console.log(headers);
+  
   const promise = new Promise((resolve, reject) => {
     $.ajax({
       url,
@@ -16,12 +12,6 @@ function request(url, type, body, headers) {
       success: resolve,
       error: reject
     });
-    console.log('ajax')
-    console.log(url);
-    console.log(type);
-    console.log(body);
-    console.log(headers);
-
   });
 
   return promise;
