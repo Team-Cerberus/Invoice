@@ -6,18 +6,30 @@ import InvoiceRow from 'invoiceRow';
 import Invoice from 'invoice';
 import { invoiceData } from 'data';
 import toastr from 'toastr';
+import { userData } from 'data';
 
 const $appContainer = $('#app-container');
 
 class InvoiceController {
+	getInvoice() {
+		Promise.all([
+			loadTemplate('invoice'),
+			userData.getUserDetails()
+		])
+			.then(([companiesTemplate, userDetails]) => {
+				$appContainer.html(companiesTemplate(userDetails.result));
+		});
+	}
+		
   get(invoiceNumber) {
 
     Promise.all([
       loadTemplate('invoice'),
-      userData.getUserDetails()
+      userData.getInvoiceDetails()
     ])
-      .then(([template, userDetails]) => {
-        $appContainer.html(userDetails.resullt);
+      .then(([template, invoiceDetails]) => {
+		  console.log(invoiceDetails);
+        $appContainer.html(invoiceDetails.resullt);
       });
   }
 

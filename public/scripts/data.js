@@ -83,6 +83,14 @@ function getUserDetails() {
     return requester.get('users', headers);
 }
 
+function getInvoiceDetails() {
+    const headers = {
+        'x-auth-key': storageProvider.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
+    };
+
+    return requester.get('users', headers);
+}
+
 function getSellers() {
     const body = {
         headers: {
