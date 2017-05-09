@@ -15,7 +15,7 @@ class UserController {
         ])
             .then(([profileTemplate, navbarTemplate, userDetails]) => {
                 $appContainer.html(profileTemplate(userDetails));
-				$secondBar.html(navbarTemplate(userDetails));
+				$secondBar.html(navbarTemplate(userDetails.result));
             });
     }
 	
@@ -39,7 +39,7 @@ class UserController {
         ])
             .then(([invoicesTemplate, navbarTemplate, userDetails]) => {
                 $appContainer.html(invoicesTemplate(userDetails));
-				$secondBar.html(navbarTemplate(userDetails));
+				$secondBar.html(navbarTemplate(userDetails.result));
             });
     }
 	

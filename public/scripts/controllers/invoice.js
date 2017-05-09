@@ -1,14 +1,11 @@
 import $ from 'jquery';
 import { load as loadTemplate } from 'templates';
-import { sampleData } from 'devDataContainer';
 import Entity from 'entity';
 import Seller from 'seller';
 import InvoiceRow from 'invoiceRow';
 import Invoice from 'invoice';
 import { invoiceData } from 'data';
 import toastr from 'toastr';
-
-
 
 const $appContainer = $('#app-container');
 
