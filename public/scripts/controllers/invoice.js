@@ -96,23 +96,6 @@ class InvoiceController {
       newInvoiceRows.push(newInvoiceRow);
     }
 
-    // $('.invoice-row')
-    //   .toArray()
-    //   .forEach(
-    //   (invoiceRow) => {
-    //     Console.log($(invoiceRow));
-    //     const newInvoiceRow = new InvoiceRow(
-    //       $(invoiceRow).find('.product-id').val(),
-    //       $invoiceRow.find('.product-name').val(),
-    //       $invoiceRow.find('.product-unit').val(),
-    //       $invoiceRow.find('.product-quantity').val(),
-    //       $invoiceRow.find('.product-unit-price').val(),
-    //       $invoiceRow.find('.product-total-price').val(),
-    //     );
-    //     newInvoiceRows.push(newInvoiceRow);
-    //   }
-    //   );
-
     const newInvoice = new Invoice(
       $('#documentId').val(),
       $('#documentDateIssued').val(),

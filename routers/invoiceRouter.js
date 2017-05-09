@@ -10,7 +10,7 @@ module.exports = function (db) {
             console.log(req.body);
 
             const user = req.user;
-            if (!user) {            
+            if (!user) {
                 res.status(401)
                     .json('Not authorized User');
                 return;
@@ -25,7 +25,7 @@ module.exports = function (db) {
                 .get('sellers')
                 .find({
                     idNumber: user.seller.idNumber
-                })   
+                })
                 .value();
             const invoice = seller
                 .get('invoices')
@@ -36,7 +36,7 @@ module.exports = function (db) {
 
             res.status(201)
                 .json({
-                    result: invoice 
+                    result: invoice
                 });
         })
         .post('/', function (req, res) {
@@ -44,7 +44,7 @@ module.exports = function (db) {
             console.log(req.body);
 
             const user = req.user;
-            if (!user) {            
+            if (!user) {
                 res.status(401)
                     .json('Not authorized User');
                 return;
@@ -52,17 +52,20 @@ module.exports = function (db) {
 
             let userInDB = req.body.user; //.toLowerCase();
             console.log(userInDB);
+
             const dbUser = db.get('users')
                 .find({
                     username: userInDB
                 })
-                .value();
-            const seller = dbUser
+
+            const seller = db.get('users')
+                .find(
+                { username: userInDB }
+                )
                 .get('sellers')
                 .find({
                     idNumber: req.seller.idNumber
-                })   
-                .value();
+                });
 
             const invoices = seller.get('invoices');
             if (!invoices) {
@@ -70,7 +73,7 @@ module.exports = function (db) {
                     .set('invoices', [])
                     .write()
                     .then(
-                        () => invoices = dbUser.get('invoices')
+                    () => invoices = dbUser.get('invoices')
                     );
             }
 
@@ -78,12 +81,12 @@ module.exports = function (db) {
                 .push(req.invoice)
                 .write()
                 .then(
-                    () => {
-                        res.status(201)
-                            .json({
-                                result: user
-                            });
-                    }
+                () => {
+                    res.status(201)
+                        .json({
+                            result: user
+                        });
+                }
                 );
         })
         .put('/', function (req, res) {
@@ -91,7 +94,7 @@ module.exports = function (db) {
             console.log(req.body);
 
             const user = req.user;
-            if (!user) {            
+            if (!user) {
                 res.status(401)
                     .json('Not authorized User');
                 return;
@@ -106,7 +109,7 @@ module.exports = function (db) {
                 .get('sellers')
                 .find({
                     idNumber: req.seller.idNumber
-                })   
+                })
                 .value();
 
             const invoices = seller.get('invoices');
@@ -115,21 +118,21 @@ module.exports = function (db) {
                     .set('invoices', [])
                     .write()
                     .then(
-                        () => invoices = dbUser.get('invoices')
+                    () => invoices = dbUser.get('invoices')
                     );
             }
-          
+
             invoices
-                .remove({ number: req.invoice.number })   
+                .remove({ number: req.invoice.number })
                 .push(req.invoice)
                 .write()
                 .then(
-                    () => {
-                        res.status(201)
-                            .json({
-                                result: user
-                            });
-                    }
+                () => {
+                    res.status(201)
+                        .json({
+                            result: user
+                        });
+                }
                 );
         });
     return router;
