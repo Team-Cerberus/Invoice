@@ -6,9 +6,6 @@ module.exports = function (db) {
     router
         .get('/', function (req, res) {
 
-            console.log('start:');
-            console.log(req.body);
-
             const user = req.user;
             if (!user) {
                 res.status(401)
@@ -40,9 +37,7 @@ module.exports = function (db) {
                 });
         })
         .post('/', function (req, res) {
-            console.log('start:');
-            console.log(req.body);
-
+           
             const user = req.user;
             if (!user) {
                 res.status(401)
@@ -79,9 +74,7 @@ module.exports = function (db) {
                 });
         })
         .put('/', function (req, res) {
-            console.log('start:');
-            console.log(req.body);
-
+            
             const user = req.user;
             if (!user) {
                 res.status(401)
