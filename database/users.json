@@ -105,6 +105,12 @@
       "passHash": "d4d31573eca18a0c0b6b382c676f8750e1793210",
       "userNameLower": "stefan-new",
       "authKey": "d4d31573eca18a0c0b6b382c676f8750e1793210uIMDAgxcYLsdmcFt!hZn"
+    },
+    {
+      "userName": "ludzhev",
+      "passHash": "97cbb8a3a6aade1802a465dd0fd6fe03be8dce2e",
+      "userNameLower": "ludzhev",
+      "authKey": "97cbb8a3a6aade1802a465dd0fd6fe03be8dce2eMTg)YZXlZ)-=tONJzeGo"
     }
   ]
 }
