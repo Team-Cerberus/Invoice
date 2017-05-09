@@ -6,7 +6,6 @@ import InvoiceRow from 'invoiceRow';
 import Invoice from 'invoice';
 import { userData } from 'data';
 import toastr from 'toastr';
-import { userData } from 'data';
 
 const $appContainer = $('#app-container');
 

@@ -11,13 +11,13 @@ mockRequire('cryptojs', {
 mockRequire('requester', {
     post: () => Promise.resolve({
         result: {
-            username: 'username',
+            userName: 'username',
             passHash: 'HASHED_PASSWORD'
         }
     }),
     put: () => Promise.resolve({
         result: {
-            username: 'username',
+            userName: 'username',
             authKey: 'AUTHENTICATION_KEY'
         }
     })
@@ -38,7 +38,7 @@ describe('Data layer tests', () => {
 
         describe('Register tests', () => {
             const user = {
-                username: 'username',
+                userName: 'username',
                 password: 'password'
             };
 
@@ -66,7 +66,7 @@ describe('Data layer tests', () => {
             it('expect register to make a POST request to api/users', (done) => {
 
                 userData.register(user)
-                    .then(expect(requesterPostSpy).to.have.been.calledWith('api/users'))
+                    .then(expect(requesterPostSpy).to.have.been.calledWith('users'))
                     .then(() => done())
                     .catch(done);
             });
@@ -76,9 +76,9 @@ describe('Data layer tests', () => {
                 userData.register(user)
                     .then(() => {
                         const expected = {
-                            username: user.username
+                            userName: user.userName
                         };
-                        expect(requesterPostSpy.args[0][1].username).to.equal(user.username);
+                        expect(requesterPostSpy.args[0][1].userName).to.equal(user.userName);
                     })
                     .then(() => done())
                     .catch(done);
@@ -95,7 +95,7 @@ describe('Data layer tests', () => {
             it('expect register to make a call to CryptoJS.SHA1() with correct params', (done) => {
 
                 userData.register(user)
-                    .then(expect(cryptoJSSpy).to.have.been.calledWith(user.username + user.password))
+                    .then(expect(cryptoJSSpy).to.have.been.calledWith(user.userName + user.password))
                     .then(() => done())
                     .catch(done);
             });
@@ -124,7 +124,7 @@ describe('Data layer tests', () => {
             it('expect register function to return a Promise which resolves with registered username', (done) => {
 
                 userData.register(user)
-                    .then((value) => expect(value).to.deep.equal(user.username))
+                    .then((value) => expect(value).to.deep.equal(user.userName))
                     .then(() => done())
                     .catch(done);
             });
@@ -132,7 +132,7 @@ describe('Data layer tests', () => {
 
         describe('LogIn tests', () => {
             const user = {
-                username: 'username',
+                userName: 'username',
                 password: 'password'
             };
 
@@ -166,7 +166,7 @@ describe('Data layer tests', () => {
             it('expect login to make a PUT request to api/users/auth', (done) => {
 
                 userData.logIn(user, localStorage)
-                    .then(expect(requesterPutSpy).to.have.been.calledWith('api/users/auth'))
+                    .then(expect(requesterPutSpy).to.have.been.calledWith('users/auth'))
                     .then(() => done())
                     .catch(done);
             });
@@ -176,9 +176,9 @@ describe('Data layer tests', () => {
                 userData.logIn(user, localStorage)
                     .then(() => {
                         const expected = {
-                            username: user.username
+                            userName: user.userName
                         };
-                        expect(requesterPutSpy.args[0][1].username).to.equal(user.username);
+                        expect(requesterPutSpy.args[0][1].userName).to.equal(user.userName);
                     })
                     .then(() => done())
                     .catch(done);
@@ -195,7 +195,7 @@ describe('Data layer tests', () => {
             it('expect login to make a call to CryptoJS.SHA1() with correct params', (done) => {
 
                 userData.logIn(user, localStorage)
-                    .then(expect(cryptoJSSpy).to.have.been.calledWith(user.username + user.password))
+                    .then(expect(cryptoJSSpy).to.have.been.calledWith(user.userName + user.password))
                     .then(() => done())
                     .catch(done);
             });
@@ -218,7 +218,7 @@ describe('Data layer tests', () => {
                 expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null;
 
                 userData.logIn(user, sessionStorage)
-                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.equal(user.username))
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.equal(user.userName))
                     .then(() => done())
                     .catch(done);
             });
@@ -228,7 +228,7 @@ describe('Data layer tests', () => {
                 expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null;
 
                 userData.logIn(user)
-                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.equal(user.username))
+                    .then(() => expect(sessionStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.equal(user.userName))
                     .then(() => done())
                     .catch(done);
             });
@@ -238,7 +238,7 @@ describe('Data layer tests', () => {
                 expect(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.be.null;
 
                 userData.logIn(user, localStorage)
-                    .then(() => expect(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.equal(user.username))
+                    .then(() => expect(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY)).to.equal(user.userName))
                     .then(() => done())
                     .catch(done);
             });
@@ -283,7 +283,7 @@ describe('Data layer tests', () => {
             it('expect login function to return a Promise which resolves with registered username', (done) => {
 
                 userData.logIn(user, localStorage)
-                    .then((value) => expect(value).to.deep.equal(user.username))
+                    .then((value) => expect(value).to.deep.equal(user.userName))
                     .then(() => done())
                     .catch(done);
             });
@@ -371,7 +371,7 @@ describe('Data layer tests', () => {
         describe('hasUser tests', () => {
 
             const user = {
-                username: 'username',
+                userName: 'username',
                 password: 'password'
             };
 
@@ -420,7 +420,7 @@ describe('Data layer tests', () => {
                 userData.logIn(user, localStorage)
                     .then(() => {
                         const expectedUser = {
-                            username: user.username,
+                            userName: user.userName,
                             authKey: 'AUTHENTICATION_KEY'
                         }
 

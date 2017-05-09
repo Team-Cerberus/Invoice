@@ -63,11 +63,11 @@ function hasUser(storage) {
     storageProvider = storage || localStorage;
 
     const user = {
-        username: storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY),
+        userName: storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY),
         authKey: storageProvider.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
     };
 
-    if (user.username && user.authKey) {
+    if (user.userName && user.authKey) {
         return user;
     }
     else {
