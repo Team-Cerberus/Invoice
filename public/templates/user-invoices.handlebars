@@ -1,17 +1,11 @@
 <div class="container panel panel-default">
 	<div class="row">
         <h2>Invoices for user <span class='label'>{{userName}}</span></h2>
-<h3>My sellers</h3>
-	<div class="list-group">
-	{{#each sellers}}
-		<a href="#" class="list-group-item">{{name}}</a>
-	{{/each}}
-	</div>
-<h3>My buyers</h3>
-	<div class="list-group">
-	{{#each buyers}}
-		<a href="#" class="list-group-item">{{name}}</a>
-	{{/each}}
+		<h3>Invoices</h3>
+		<div class="list-group">
+			{{#each invoices}}
+				<a href="#/user/{{../userName}}/invoices/{{id}}" class="list-group-item">{{id}}</a>
+			{{/each}}
+		</div>
 	</div>
 </div>
-

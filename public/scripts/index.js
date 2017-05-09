@@ -18,6 +18,7 @@ router
   .on('/user/:username/profile', userController.profile)
   .on('/user/:username/companies', userController.companies)
   .on('/user/:username/invoices', userController.invoices)
+  .on('/user/:username/invoices/:id', invoiceController.getInvoice)
   .on('/invoice', invoiceController.get)
   .on('/invoice/addrow', invoiceController.addInvoiceRow)
   .on('/api/invoice/post', invoiceController.postInvoice)

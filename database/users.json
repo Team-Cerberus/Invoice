@@ -29,6 +29,76 @@
       "passHash": "72fcace2252e246d8dbb03ed614312744b45b557",
       "usernameLower": "stefan",
       "authKey": "undefinedRhAq)YqUbnUunCVnUQGPgdT_n%DVO-lQ*DXjQdRx^nyE(u+(HFW"
+    },
+    {
+      "userFullName": "My Awesome User",
+      "userName": "BilboBagins",
+      "passHash": "8125940271dc3b88919f07db25ad14e446575be5",
+      "userNameLower": "bilbobagins",
+      "authKey": "8125940271dc3b88919f07db25ad14e446575be5+jH(aeqDwgTnO-xiobX_",
+      "sellers": [
+        {
+          "name": "My Awesome Seller 1",
+          "streetAddress": "Sofia, Invisible str. 11",
+          "city": "Sofia",
+          "zIP": "1000",
+          "idNumber": "12345",
+          "vATNumber": "900000000",
+          "authorizedPerson": "My Awesome MOL",
+          "recepients": [ ],
+          "issuers": [ ],
+          "bankAccounts": [ ],
+          "invoices": [ ]
+        },
+        {
+          "name": "My Other Seller",
+          "streetAddress": "Plovdiv, Asenovgradsko shose 1",
+          "city": "Plovdiv",
+          "zIP": "1234",
+          "idNumber": "22222",
+          "vATNumber": "223423414",
+          "authorizedPerson": "My Other MOL",
+          "recepients": [ ],
+          "issuers": [ ],
+          "bankAccounts": [ ],
+          "invoices": [ ]
+        }
+      ],
+      "buyers": [
+        {
+          "name": "My Awesome Buyer 23",
+          "streetAddress": "Vladislav Varnenchik blvd. 5",
+          "city": "Sofia",
+          "zIP": "1234",
+          "idNumber": "22222",
+          "vATNumber": "1234567489",
+          "authorizedPerson": "Their Awesome MOL",
+          "bankAccounts": [ ]
+        }
+      ],
+      "invoices": [
+        {
+          "id": "02522000",
+          "buyer": "Reynholm Industries",
+          "seller": "My awesome seller 1",
+          "date": "09.05.2017 06:28",
+          "total": "599.99"
+        },
+        {
+          "id": "02522001",
+          "buyer": "Reynholm Industries",
+          "seller": "My awesome seller 1",
+          "date": "09.05.2017 07:12",
+          "total": "211.00"
+        },
+        {
+          "id": "02522002",
+          "buyer": "Generic Company Ltd.",
+          "seller": "My awesome seller 2",
+          "date": "09.05.2017 07:22",
+          "total": "150.34"
+        }
+      ]
     }
   ]
 }
