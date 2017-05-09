@@ -1,6 +1,36 @@
 {
   "users": [
     {
+      "username": "Doncho",
+      "passHash": "4cb5ba2355368d4dfd14c9eee9a134791f7001cb",
+      "usernameLower": "doncho",
+      "authKey": "undefined+tusvd@Kh_@ixbA*Q$fvLmq(CJJmu*DN%E^i@OUr&eoAJn!*uak"
+    },
+    {
+      "username": "Cuki",
+      "passHash": "6edbb5c948d25789eccdfb37b70ff7f728f49786",
+      "usernameLower": "cuki",
+      "authKey": "undefinedLcy$^v^zXyoxyXQ_BbAJIRYwi%KiGGlD^ry+-N@AIwpP%EhOAUK"
+    },
+    {
+      "username": "Cuki2",
+      "passHash": "dfacf7f490d8e38e7895caad02e3693236216f51",
+      "usernameLower": "cuki2",
+      "authKey": "undefinedTZvCUbyZH(!=m-+)$fcAjzD)NPiWfGt(r!MHSzrCPAb(nGfp%*!"
+    },
+    {
+      "username": "Cuki3",
+      "passHash": "05e18f169bb85da8722deb800fa8e3898c809146",
+      "usernameLower": "cuki3",
+      "authKey": "undefined&a*=xajP_XX&NIPuGIJIgcTfFWlZ&#BdA*zD*@TUUvNc^TmOfw("
+    },
+    {
+      "username": "stefan",
+      "passHash": "72fcace2252e246d8dbb03ed614312744b45b557",
+      "usernameLower": "stefan",
+      "authKey": "undefinedRhAq)YqUbnUunCVnUQGPgdT_n%DVO-lQ*DXjQdRx^nyE(u+(HFW"
+    },
+    {
       "userFullName": "My Awesome User",
       "userName": "BilboBagins",
       "passHash": "8125940271dc3b88919f07db25ad14e446575be5",

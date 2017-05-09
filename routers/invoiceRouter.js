@@ -4,12 +4,13 @@ module.exports = function (db) {
     const router = express.Router();
 
     router
-        .get('/invoice', function (req, res) {
+        .get('/', function (req, res) {
 
-            console.log(req);
+            console.log('start:');
+            console.log(req.body);
 
             const user = req.user;
-            if (!user) {            //copied this from self-manager. It obviously requires user authentication
+            if (!user) {            
                 res.status(401)
                     .json('Not authorized User');
                 return;
@@ -38,19 +39,22 @@ module.exports = function (db) {
                     result: invoice 
                 });
         })
-        .post('/invoice', function (req, res) {
-            console.log(req);
+        .post('/', function (req, res) {
+            console.log('start:');
+            console.log(req.body);
 
             const user = req.user;
-            if (!user) {            //copied this from self-manager. It obviously requires user authentication
+            if (!user) {            
                 res.status(401)
                     .json('Not authorized User');
                 return;
             }
 
+            let userInDB = req.body.user; //.toLowerCase();
+            console.log(userInDB);
             const dbUser = db.get('users')
                 .find({
-                    username: user.username.toLowerCase()
+                    username: userInDB
                 })
                 .value();
             const seller = dbUser
@@ -82,11 +86,12 @@ module.exports = function (db) {
                     }
                 );
         })
-        .put('/invoice', function (req, res) {
-        console.log(req);
+        .put('/', function (req, res) {
+            console.log('start:');
+            console.log(req.body);
 
             const user = req.user;
-            if (!user) {            //copied this from self-manager. It obviously requires user authentication
+            if (!user) {            
                 res.status(401)
                     .json('Not authorized User');
                 return;

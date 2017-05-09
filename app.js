@@ -23,7 +23,7 @@ const usersRouter = require('./routers/usersRouter')(db),
   buyersRouter = require('./routers/buyersRouter')(db);
 
 app.use('/users', usersRouter);
-app.use('/invoice', invoiceRouter);
+app.use('/api/invoice', invoiceRouter);
 app.use('/sellers', sellersRouter);
 app.use('/buyers', buyersRouter);
 

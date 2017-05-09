@@ -24,6 +24,7 @@ function configure(db) {
       db.get('users')
         .value()
         .push(user);
+      db.write();
 
       res.status(200)
         .json({

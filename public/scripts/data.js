@@ -174,21 +174,24 @@ function getInvoices() {            //TODO: For a single invoice and for the las
             'x-auth-key': storageProvider.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
         }
     }
-    return requester.get('/invoices', options)
+    return requester.get('api/invoice', options)
         .then(function (res) {
             return res.result;
         });
 }
 
 function invoiceAdd(invoice) {
+    const username = storageProvider.getItem(LOCAL_STORAGE_USERNAME_KEY);
+
     var options = {
+        user : username,
         data: invoice,
         headers: {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
         }
     };
-    console.log(invoice);
-    return requester.post('/invoices', options)
+    //console.log(invoice);
+    return requester.post('api/invoice', options)
         .then(function (resp) {
             return resp.result;
         });
@@ -201,7 +204,7 @@ function invoiceUpdate(invoice) {
             'x-auth-key': localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY)
         }
     };
-    return requester.put('/invoices', options)
+    return requester.put('api/invoice', options)
         .then(function (resp) {
             return resp.result;
         });
